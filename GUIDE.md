@@ -1,8 +1,10 @@
-# Git Team Housekeeping Guide
+# UBH Software Git Team Housekeeping Guide 🐱🫀
 
-This document explains the Git workflow that our software team should follow when creating branches, making commits, and keeping the project organized.
+Welcome to our Git guide!
 
-The goal of this guide is to keep our repository clean, readable, and easy for everyone on the team to work with.
+This document explains the Git workflow that our team should follow when creating branches, making commits, and keeping the project organized.
+
+The goal is to keep our repository clean, readable, and easy for everyone on the team to work with.
 
 ---
 
@@ -17,7 +19,7 @@ The goal of this guide is to keep our repository clean, readable, and easy for e
 
 ## General Rules
 
-Please follow these rules when working with Git:
+Before touching the code, please keep these rules in mind:
 
 - Do not push directly to the `main` branch.
 - Create a new branch for every feature, fix, or task.
@@ -157,8 +159,14 @@ git push
 ```
 
 #### Update Main Branch
-
 ```bash
 git checkout main
 git pull origin main
 ```
+---
+
+If someone breaks the code, we have a deal between us:
+
+Meal for the 4 of us! 🍽️
+
+## Happy UBH Frontend Software Team!
