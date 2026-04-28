@@ -168,5 +168,6 @@ git pull origin main
 If someone breaks the code, we have a deal between us:
 
 Meal for the 4 of us! 🍽️
+(pls refers to our `AGREEMENT.md`)
 
-## Happy UBH Frontend Software Team!
+**Happy UBH Frontend Software Team!**
