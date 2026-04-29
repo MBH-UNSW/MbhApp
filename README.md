@@ -1,3 +1,12 @@
+## 📚 Documentation
+
+- [Getting Started](UBH_GET_START.md)
+- [Git Guide](GUIDE.md)
+- [Team Agreement](AGREEMENT.md)
+
+---
+***The documentation below is provided by React Native***
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
