@@ -5,8 +5,10 @@
  * @format
  */
 
+import '../global.css';
+
 import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { Alert, Button, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -27,11 +29,20 @@ function AppContent() {
   const safeAreaInsets = useSafeAreaInsets();
 
   return (
-    <View style={styles.container}>
-      <NewAppScreen
+    <View className="flex-1 items-center justify-center bg-white">
+      {/*<NewAppScreen
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
+      />*/}
+      <Text className="text-xl font-bold text-blue-500">
+        Yay! Tailwind is all set up
+      </Text>
+      <Button
+        title="Press me"
+        onPress={() => Alert.alert('Button pressed')}
+        color="blue"
       />
+      
     </View>
   );
 }
@@ -39,6 +50,7 @@ function AppContent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
   },
 });
 
