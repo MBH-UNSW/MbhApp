@@ -8,11 +8,22 @@
 import '../global.css';
 
 import { NewAppScreen } from '@react-native/new-app-screen';
-import { Alert, Button, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import {
+  Alert,
+  Button,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+} from 'react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+
+import { CustomButton } from './components/Button';
+import { Camera } from 'lucide-react-native';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -37,12 +48,28 @@ function AppContent() {
       <Text className="text-xl font-bold text-blue-500">
         Yay! Tailwind is all set up
       </Text>
-      <Button
-        title="Press me"
+
+      <CustomButton
+        title="Cancel"
+        variant="outlined"
         onPress={() => Alert.alert('Button pressed')}
-        color="blue"
       />
-      
+
+      <CustomButton
+        title="Cancel"
+        variant="outlined"
+        size="sm"
+        iconLeft={Camera}
+        iconRight={Camera}
+        onPress={() => Alert.alert('Button pressed')}
+      />
+
+      <CustomButton
+        title="Pressed Me"
+        size="xl"
+        variant="outlined"
+        onPress={() => Alert.alert('Button pressed')}
+      />
     </View>
   );
 }
