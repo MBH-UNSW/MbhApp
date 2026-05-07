@@ -7,13 +7,11 @@
 
 import '../global.css';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
+// import { NewAppScreen } from '@react-native/new-app-screen';
 import {
   Alert,
-  Button,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
   View,
 } from 'react-native';
@@ -24,6 +22,7 @@ import {
 
 import { CustomButton } from './components/Button';
 import { Camera } from 'lucide-react-native';
+import { Typography, Body1, Caption, H1 } from './components/Typography';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -45,9 +44,13 @@ function AppContent() {
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
       />*/}
-      <Text className="text-xl font-bold text-blue-500">
-        Yay! Tailwind is all set up
-      </Text>
+      
+      <H1>Hello UBH</H1>
+      <Body1 color="alert">This is normal text.</Body1>
+      <Caption color="primary">caption caption hehehe</Caption>
+      <Typography variant="body2" customColor="#7C3AED" underline italic>
+        Custom purple text
+      </Typography>
 
       <CustomButton
         title="Cancel"
