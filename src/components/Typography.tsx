@@ -140,5 +140,3 @@ export const Body2 = (props: Omit<TypographyProps, 'variant'>) => (
 export const Caption = (props: Omit<TypographyProps, 'variant'>) => (
   <Typography variant="caption" {...props} />
 );
-
-export default Typography;
