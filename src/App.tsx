@@ -22,7 +22,7 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import { CustomButton } from './components/Button';
+import { UBHButton } from './components/Button';
 import { Camera } from 'lucide-react-native';
 import { Typography, Body1, Caption, H1 } from './components/Typography';
 import { SearchBar } from './components/SearchBar';
@@ -56,13 +56,13 @@ function AppContent() {
         Custom purple text
       </Typography>
 
-      <CustomButton
+      <UBHButton
         title="Cancel"
         variant="outlined"
         onPress={() => Alert.alert('Button pressed')}
       />
 
-      <CustomButton
+      <UBHButton
         title="Cancel"
         variant="outlined"
         size="sm"
@@ -71,7 +71,7 @@ function AppContent() {
         onPress={() => Alert.alert('Button pressed')}
       />
 
-      <CustomButton
+      <UBHButton
         title="Pressed Me"
         size="xl"
         variant="outlined"

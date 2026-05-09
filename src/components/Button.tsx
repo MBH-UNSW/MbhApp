@@ -8,7 +8,7 @@ type ButtonState = 'default' | 'disabled' | 'pressed' | 'hovered';
 
 type IconComponent = React.ComponentType<LucideProps>;
 
-type CustomButtonProps = {
+type UBHButtonProps = {
   title: string;
   size?: ButtonSize;
   variant?: ButtonVariant;
@@ -23,7 +23,7 @@ type CustomButtonProps = {
 const cn = (...classes: Array<string | false | undefined | null>) =>
   classes.filter(Boolean).join(' ');
 
-export function CustomButton({
+export function UBHButton({
   title,
   size = 'sm',
   variant = 'contained',
@@ -33,7 +33,7 @@ export function CustomButton({
   onPress,
   className,
   textClassName,
-}: CustomButtonProps) {
+}: UBHButtonProps) {
   const [isPressed, setIsPressed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
