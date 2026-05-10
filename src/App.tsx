@@ -8,12 +8,14 @@
 import '../global.css';
 
 // import { NewAppScreen } from '@react-native/new-app-screen';
+import React, { useState } from 'react';
 import {
   Alert,
   StatusBar,
   StyleSheet,
   useColorScheme,
   View,
+  ScrollView
 } from 'react-native';
 import {
   SafeAreaProvider,
@@ -23,6 +25,7 @@ import {
 import { CustomButton } from './components/Button';
 import { Camera } from 'lucide-react-native';
 import { Typography, Body1, Caption, H1 } from './components/Typography';
+import { SearchBar } from './components/SearchBar';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -37,6 +40,7 @@ function App() {
 
 function AppContent() {
   const safeAreaInsets = useSafeAreaInsets();
+  const [searchValue, setSearchValue] = useState('');
 
   return (
     <View className="flex-1 items-center justify-center bg-white">
@@ -44,7 +48,7 @@ function AppContent() {
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
       />*/}
-      
+
       <H1>Hello UBH</H1>
       <Body1 color="alert">This is normal text.</Body1>
       <Caption color="primary">caption caption hehehe</Caption>
@@ -73,6 +77,35 @@ function AppContent() {
         variant="outlined"
         onPress={() => Alert.alert('Button pressed')}
       />
+
+      <View className="mt-6 w-full gap-3 px-5">
+        <SearchBar
+          value={searchValue}
+          onChangeText={setSearchValue}
+          placeholder="Search"
+        />
+
+        <SearchBar
+          value=""
+          onChangeText={() => { }}
+          placeholder="Disabled"
+          visualState="disabled"
+        />
+
+        <SearchBar
+          value=""
+          onChangeText={() => { }}
+          placeholder="Error"
+          visualState="error"
+        />
+
+        <SearchBar
+          value="Loading"
+          onChangeText={() => { }}
+          placeholder="Loading"
+          visualState="loading"
+        />
+      </View>
     </View>
   );
 }
