@@ -63,7 +63,7 @@ export function SearchBar({
         (showClearButton ?? value.length > 0);
 
     const effectiveClearIconVariant: ClearIconVariant =
-        clearIconVariant ?? (value.length > 0 ? 'neutral' : 'subtle');
+        clearIconVariant ?? 'subtle';
 
     const handleClear = () => {
         onChangeText('');
