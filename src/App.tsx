@@ -7,15 +7,22 @@
 
 import '../global.css';
 
-import React, { useState } from 'react';
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { Alert, Button, StatusBar, StyleSheet, Text, useColorScheme, View, ScrollView } from 'react-native';
+// import { NewAppScreen } from '@react-native/new-app-screen';
+import {
+  Alert,
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+  View,
+} from 'react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import { SearchBar } from './components/SearchBar';
+import { CustomButton } from './components/Button';
+import { Camera } from 'lucide-react-native';
+import { Typography, Body1, Caption, H1 } from './components/Typography';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -33,55 +40,41 @@ function AppContent() {
   const [searchValue, setSearchValue] = useState('');
 
   return (
-    <ScrollView
-      className="flex-1 bg-white"
-      contentContainerStyle={{
-        paddingTop: safeAreaInsets.top + 24,
-        paddingBottom: safeAreaInsets.bottom + 24,
-        paddingHorizontal: 20,
-        alignItems: 'center',
-      }}
-    >
-      <View className="w-full max-w-[360px] gap-4">
-        <SearchBar value={searchValue} onChangeText={setSearchValue} />
+    <View className="flex-1 items-center justify-center bg-white">
+      {/*<NewAppScreen
+        templateFileName="App.tsx"
+        safeAreaInsets={safeAreaInsets}
+      />*/}
+      
+      <H1>Hello UBH</H1>
+      <Body1 color="alert">This is normal text.</Body1>
+      <Caption color="primary">caption caption hehehe</Caption>
+      <Typography variant="body2" customColor="#7C3AED" underline italic>
+        Custom purple text
+      </Typography>
 
-        <SearchBar value="" onChangeText={() => { }} visualState="disabled" />
+      <CustomButton
+        title="Cancel"
+        variant="outlined"
+        onPress={() => Alert.alert('Button pressed')}
+      />
 
-        <SearchBar
-          value=""
-          onChangeText={() => { }}
-          visualState="focused"
-          showClearButton
-          clearIconVariant="subtle"
-        />
+      <CustomButton
+        title="Cancel"
+        variant="outlined"
+        size="sm"
+        iconLeft={Camera}
+        iconRight={Camera}
+        onPress={() => Alert.alert('Button pressed')}
+      />
 
-        <SearchBar
-          value="Que"
-          onChangeText={() => { }}
-          visualState="focused"
-          showClearButton
-          clearIconVariant="neutral"
-        />
-
-        <SearchBar
-          value="Query"
-          onChangeText={() => { }}
-          visualState="focused"
-          showClearButton
-          clearIconVariant="primary"
-        />
-
-        <SearchBar
-          value="Query"
-          onChangeText={() => { }}
-          showClearButton={false}
-        />
-
-        <SearchBar value="" onChangeText={() => { }} visualState="error" />
-
-        <SearchBar value="Query" onChangeText={() => { }} visualState="loading" />
-      </View>
-    </ScrollView>
+      <CustomButton
+        title="Pressed Me"
+        size="xl"
+        variant="outlined"
+        onPress={() => Alert.alert('Button pressed')}
+      />
+    </View>
   );
 }
 
