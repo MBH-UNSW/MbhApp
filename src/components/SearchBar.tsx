@@ -1,116 +1,96 @@
+import { Search } from 'lucide-react-native';
 import React, { useState } from 'react';
-import type { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import {
-    StyleSheet,
+    StyleProp,
     TextInput,
+    TextInputProps,
+    TextStyle,
     View,
 } from 'react-native';
 
-import ClearIcon, { type ClearIconVariant } from './icons/ClearIcon';
-import ErrorIcon from './icons/ErrorIcon';
-import LoadingSpinner from './icons/LoadingSpinner';
+import { ClearIcon, type ClearIconVariant } from './icons/ClearIcon';
+import { ErrorIcon } from './icons/ErrorIcon';
+import { LoadingSpinner } from './icons/LoadingSpinner';
 
-export type SearchBarVisualState =
-    | 'default'
-    | 'disabled'
-    | 'focused'
-    | 'error'
-    | 'loading';
+type SearchBarState = 'default' | 'focused' | 'disabled' | 'error' | 'loading';
 
-type SearchBarProps = Omit<TextInputProps, 'value' | 'onChangeText' | 'editable'> & {
+type SearchBarProps = Omit<
+    TextInputProps,
+    'value' | 'onChangeText' | 'editable' | 'style'
+> & {
     value: string;
     onChangeText: (text: string) => void;
-    visualState?: SearchBarVisualState;
+    visualState?: SearchBarState;
     showClearButton?: boolean;
     clearIconVariant?: ClearIconVariant;
     onClear?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
+    className?: string;
+    inputClassName?: string;
+    inputStyle?: StyleProp<TextStyle>;
 };
 
-const colours = {
-    mutedText: '#727272',
-    disabledText: '#949494',
+const cn = (...classes: Array<string | false | undefined | null>) =>
+    classes.filter(Boolean).join(' ');
 
-    icon: '#727272',
-    disabledIcon: '#949494',
-    focusedIcon: '#393939',
-};
-
-export default function SearchBar({
+export function SearchBar({
     value,
     onChangeText,
-    placeholder = 'Search',
-    visualState,
+    visualState = 'default',
     showClearButton,
     clearIconVariant,
     onClear,
-    containerStyle,
+    placeholder = 'Search',
+    className,
+    inputClassName,
+    inputStyle,
     onFocus,
     onBlur,
-    style,
-    ...textInputProps
+    ...props
 }: SearchBarProps) {
     const [isFocused, setIsFocused] = useState(false);
 
-    const currentState: SearchBarVisualState =
-        visualState ?? (isFocused ? 'focused' : 'default');
+    const isDisabled = visualState === 'disabled';
+    const isError = visualState === 'error';
+    const isLoading = visualState === 'loading';
 
-    const isDisabled = currentState === 'disabled';
-    const isFocusedStyle = currentState === 'focused';
-    const isError = currentState === 'error';
-    const isLoading = currentState === 'loading';
+    const currentState: SearchBarState =
+        visualState !== 'default' ? visualState : isFocused ? 'focused' : 'default';
 
     const shouldShowClearButton =
-        showClearButton ?? (!isDisabled && !isLoading && isFocusedStyle);
+        !isDisabled &&
+        !isError &&
+        !isLoading &&
+        (showClearButton ?? value.length > 0);
 
     const effectiveClearIconVariant: ClearIconVariant =
-        clearIconVariant ?? (value.length === 0 ? 'subtle' : 'neutral');
+        clearIconVariant ?? (value.length > 0 ? 'neutral' : 'subtle');
 
     const handleClear = () => {
         onChangeText('');
         onClear?.();
     };
 
-    const searchIconColour = isDisabled
-        ? colours.disabledIcon
-        : isFocusedStyle
-            ? colours.focusedIcon
-            : colours.icon;
-
-    const containerClassName = [
-        'h-11 w-full flex-row items-center rounded-lg border px-3',
-        isDisabled && 'border-neutral-300 bg-neutral-200',
-        isFocusedStyle && 'border-blue-500 bg-sky-50',
-        isError && 'border-red-700 bg-red-50',
-        !isDisabled && !isFocusedStyle && !isError && 'border-neutral-300 bg-white',
-    ]
-        .filter(Boolean)
-        .join(' ');
-
-    const inputClassName = [
-        'h-11 flex-1 px-2 text-base font-semibold',
-        isDisabled ? 'text-neutral-400' : 'text-neutral-800',
-    ]
-        .filter(Boolean)
-        .join(' ');
-
     return (
-        <View className={containerClassName} style={containerStyle}>
-            <View className="h-7 w-7 items-center justify-center">
-                <SearchIcon colour={searchIconColour} />
-            </View>
+        <View
+            className={cn(
+                'h-11 w-full flex-row items-center rounded-lg border px-3',
+                stateClasses[currentState],
+                isDisabled && 'opacity-90',
+                className,
+            )}
+        >
+            <Search
+                size={22}
+                color={searchIconColors[currentState]}
+                strokeWidth={2.25}
+            />
 
             <TextInput
                 value={value}
                 onChangeText={onChangeText}
                 placeholder={placeholder}
-                placeholderTextColor={isDisabled ? colours.disabledText : colours.mutedText}
-                editable={!isDisabled}
-                returnKeyType="search"
-                multiline={false}
-                numberOfLines={1}
-                className={inputClassName}
-                style={[styles.input, style]}
+                placeholderTextColor={placeholderColors[currentState]}
+                editable={!isDisabled && !isLoading}
                 onFocus={event => {
                     setIsFocused(true);
                     onFocus?.(event);
@@ -119,60 +99,64 @@ export default function SearchBar({
                     setIsFocused(false);
                     onBlur?.(event);
                 }}
-                accessibilityLabel="Search input"
-                {...textInputProps}
+                className={cn(
+                    'ml-2 flex-1 p-0 text-[16px] font-semibold leading-[20px]',
+                    inputTextClasses[currentState],
+                    inputClassName,
+                )}
+                style={[
+                    {
+                        includeFontPadding: false,
+                        paddingVertical: 0,
+                        textAlignVertical: 'center',
+                    },
+                    inputStyle,
+                ]}
+                {...props}
             />
 
-            <View className="h-7 w-7 items-center justify-center">
-                {isLoading ? (
-                    <LoadingSpinner />
-                ) : isError ? (
-                    <ErrorIcon />
-                ) : shouldShowClearButton ? (
-                    <ClearIcon variant={effectiveClearIconVariant} onPress={handleClear} />
-                ) : null}
-            </View>
+            {shouldShowClearButton && (
+                <ClearIcon
+                    variant={effectiveClearIconVariant}
+                    onPress={handleClear}
+                />
+            )}
+
+            {isError && <ErrorIcon />}
+
+            {isLoading && <LoadingSpinner />}
         </View>
     );
 }
 
-function SearchIcon({ colour }: { colour: string }) {
-    return (
-        <View className="relative h-6 w-6">
-            <View style={[styles.searchIconCircle, { borderColor: colour }]} />
-            <View style={[styles.searchIconHandle, { backgroundColor: colour }]} />
-        </View>
-    );
-}
+const stateClasses: Record<SearchBarState, string> = {
+    default: 'border-neutral-400 bg-white',
+    focused: 'border-blue-500 bg-blue-50',
+    disabled: 'border-neutral-400 bg-neutral-200',
+    error: 'border-red-600 bg-red-50',
+    loading: 'border-neutral-400 bg-white',
+};
 
-const styles = StyleSheet.create({
-    input: {
-        height: 24,
-        paddingTop: 0,
-        paddingBottom: 0,
-        paddingVertical: 0,
-        margin: 0,
-        fontSize: 16,
-        lineHeight: 20,
-        textAlignVertical: 'center',
-        includeFontPadding: false,
-    },
-    searchIconCircle: {
-        position: 'absolute',
-        left: 2,
-        top: 2,
-        width: 14,
-        height: 14,
-        borderWidth: 2,
-        borderRadius: 8,
-    },
-    searchIconHandle: {
-        position: 'absolute',
-        left: 15,
-        top: 16,
-        width: 8,
-        height: 2,
-        borderRadius: 1,
-        transform: [{ rotate: '45deg' }],
-    },
-});
+const inputTextClasses: Record<SearchBarState, string> = {
+    default: 'text-neutral-800',
+    focused: 'text-neutral-800',
+    disabled: 'text-neutral-500',
+    error: 'text-neutral-800',
+    loading: 'text-neutral-800',
+};
+
+const searchIconColors: Record<SearchBarState, string> = {
+    default: '#999999',
+    focused: '#727272',
+    disabled: '#949494',
+    error: '#393939',
+    loading: '#9e9e9e',
+};
+
+const placeholderColors: Record<SearchBarState, string> = {
+    default: '#999999',
+    focused: '#727272',
+    disabled: '#949494',
+    error: '#949494',
+    loading: '#727272',
+};

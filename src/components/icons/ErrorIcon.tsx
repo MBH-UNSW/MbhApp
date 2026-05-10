@@ -1,18 +1,39 @@
+// src/components/icons/ErrorIcon.tsx
+
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export default function ErrorIcon() {
+type ErrorIconProps = {
+    size?: number;
+    backgroundColor?: string;
+    color?: string;
+};
+
+export function ErrorIcon({
+    size = 22,
+    backgroundColor = '#941F1F',
+    color = '#ffffff',
+}: ErrorIconProps) {
     return (
         <View
-            className="h-6 w-6 items-center justify-center rounded-full bg-red-700"
+            className="items-center justify-center rounded-full"
             accessibilityRole="image"
             accessibilityLabel="Error"
+            style={{
+                width: size,
+                height: size,
+                borderRadius: size / 2,
+                backgroundColor,
+            }}
         >
             <Text
-                className="text-base font-extrabold text-white"
+                className="font-extrabold"
                 style={{
-                    lineHeight: 20,
-                    transform: [{ translateY: -1 }],
+                    color,
+                    fontSize: size * 0.7,
+                    lineHeight: size,
+                    includeFontPadding: false,
+                    textAlign: 'center',
                 }}
             >
                 !

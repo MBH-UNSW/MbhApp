@@ -1,20 +1,14 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
 type LoadingSpinnerProps = {
-    colour?: string;
+    color?: string;
+    size?: 'small' | 'large';
 };
 
-export default function LoadingSpinner({
-    colour = '#6B7280',
+export function LoadingSpinner({
+    color = '#000000',
+    size = 'small',
 }: LoadingSpinnerProps) {
-    return (
-        <View
-            className="h-6 w-6 items-center justify-center"
-            accessibilityRole="progressbar"
-            accessibilityLabel="Loading"
-        >
-            <ActivityIndicator size="small" color={colour} />
-        </View>
-    );
+    return <ActivityIndicator size={size} color={color} />;
 }

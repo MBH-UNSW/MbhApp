@@ -1,71 +1,42 @@
+import { X } from 'lucide-react-native';
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable } from 'react-native';
 
 export type ClearIconVariant = 'subtle' | 'neutral' | 'primary';
 
 type ClearIconProps = {
     variant?: ClearIconVariant;
-    onPress: () => void;
+    onPress?: () => void;
 };
 
-const colours = {
-    white: '#FFFFFF',
-    dark: '#1F2933',
-};
+const cn = (...classes: Array<string | false | undefined | null>) =>
+    classes.filter(Boolean).join(' ');
 
-export default function ClearIcon({
-    variant = 'neutral',
-    onPress,
-}: ClearIconProps) {
-    const isSubtle = variant === 'subtle';
-    const isPrimary = variant === 'primary';
-
-    const containerClassName = [
-        'h-6 w-6 items-center justify-center rounded-full',
-        isPrimary ? 'bg-blue-600' : 'bg-neutral-400',
-    ]
-        .filter(Boolean)
-        .join(' ');
-
-    const xColour = isSubtle || isPrimary ? colours.white : colours.dark;
-
+export function ClearIcon({ variant = 'neutral', onPress }: ClearIconProps) {
     return (
         <Pressable
             onPress={onPress}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel="Clear search"
-            className={containerClassName}
+            accessibilityLabel="Clear"
+            className={cn(
+                'h-[22px] w-[22px] items-center justify-center rounded-full',
+                clearIconClasses[variant],
+            )}
         >
-            <View
-                style={[
-                    styles.line,
-                    styles.lineOne,
-                    { backgroundColor: xColour },
-                ]}
-            />
-            <View
-                style={[
-                    styles.line,
-                    styles.lineTwo,
-                    { backgroundColor: xColour },
-                ]}
-            />
+            <X size={16} strokeWidth={3.5} color={clearIconColors[variant]} />
         </Pressable>
     );
 }
 
-const styles = StyleSheet.create({
-    line: {
-        position: 'absolute',
-        width: 12,
-        height: 2,
-        borderRadius: 1,
-    },
-    lineOne: {
-        transform: [{ rotate: '45deg' }],
-    },
-    lineTwo: {
-        transform: [{ rotate: '-45deg' }],
-    },
-});
+const clearIconClasses: Record<ClearIconVariant, string> = {
+    subtle: 'bg-neutral-400',
+    neutral: 'bg-neutral-400',
+    primary: 'bg-blue-600',
+};
+
+const clearIconColors: Record<ClearIconVariant, string> = {
+    subtle: '#ffffff',
+    neutral: '#111827',
+    primary: '#ffffff',
+};
