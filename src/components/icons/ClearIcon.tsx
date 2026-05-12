@@ -1,5 +1,5 @@
 import { X } from 'lucide-react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, View } from 'react-native';
 
 export type ClearIconVariant = 'subtle' | 'neutral' | 'primary';
@@ -13,13 +13,9 @@ const cn = (...classes: Array<string | false | undefined | null>) =>
     classes.filter(Boolean).join(' ');
 
 export function ClearIcon({ variant = 'subtle', onPress }: ClearIconProps) {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
         <Pressable
             onPress={onPress}
-            onHoverIn={() => setIsHovered(true)}
-            onHoverOut={() => setIsHovered(false)}
             hitSlop={8}
             accessibilityRole="button"
             accessibilityLabel="Clear"
@@ -27,9 +23,7 @@ export function ClearIcon({ variant = 'subtle', onPress }: ClearIconProps) {
             {({ pressed }) => {
                 const currentVariant: ClearIconVariant = pressed
                     ? 'primary'
-                    : isHovered
-                        ? 'neutral'
-                        : variant;
+                    : variant;
 
                 return (
                     <View
