@@ -1,6 +1,6 @@
 import { LucideProps } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable } from 'react-native';
 
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type ButtonVariant = 'contained' | 'outlined' | 'text';
@@ -8,32 +8,26 @@ type ButtonState = 'default' | 'disabled' | 'pressed' | 'hovered';
 
 type IconComponent = React.ComponentType<LucideProps>;
 
-type UBHButtonProps = {
-  title: string;
+type UBHIconButtonProps = {
   size?: ButtonSize;
   variant?: ButtonVariant;
   state?: ButtonState;
-  iconLeft?: IconComponent;
-  iconRight?: IconComponent;
+  icon: IconComponent;
   onPress?: () => void;
   className?: string;
-  textClassName?: string;
 };
 
 const cn = (...classes: Array<string | false | undefined | null>) =>
   classes.filter(Boolean).join(' ');
 
-export function UBHButton({
-  title,
+export function UBHIconButton({
   size = 'sm',
   variant = 'contained',
   state = 'default',
-  iconLeft: IconLeft,
-  iconRight: IconRight,
+  icon: Icon,
   onPress,
   className,
-  textClassName,
-}: UBHButtonProps) {
+}: UBHIconButtonProps) {
   const [isPressed, setIsPressed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -71,29 +65,7 @@ export function UBHButton({
         className,
       )}
     >
-      {IconLeft && (
-        <View className="mr-2">
-          <IconLeft size={iconSize} color={iconColor} />
-        </View>
-      )}
-
-      <Text
-        className={cn(
-          'font-semibold',
-          textSizeClasses[size],
-          textVariantClasses[variant],
-          textStateClasses[variant][currentState],
-          textClassName,
-        )}
-      >
-        {title}
-      </Text>
-
-      {IconRight && (
-        <View className="ml-2">
-          <IconRight size={iconSize} color={iconColor} />
-        </View>
-      )}
+      <Icon size={iconSize} color={iconColor} />
     </Pressable>
   );
 }
@@ -106,24 +78,10 @@ const sizeClasses: Record<ButtonSize, string> = {
   xl: 'px-6 py-5',
 };
 
-const textSizeClasses: Record<ButtonSize, string> = {
-  xs: 'text-xs',
-  sm: 'text-sm',
-  md: 'text-base',
-  lg: 'text-lg',
-  xl: 'text-xl',
-};
-
 const variantClasses: Record<ButtonVariant, string> = {
   contained: 'bg-red-600 border-red-600',
   outlined: 'bg-transparent border-red-600',
   text: 'bg-transparent border-transparent',
-};
-
-const textVariantClasses: Record<ButtonVariant, string> = {
-  contained: 'text-white',
-  outlined: 'text-red-600',
-  text: 'text-red-600',
 };
 
 const stateClasses: Record<ButtonVariant, Record<ButtonState, string>> = {
@@ -144,27 +102,6 @@ const stateClasses: Record<ButtonVariant, Record<ButtonState, string>> = {
     pressed: 'bg-red-100 border-transparent',
     hovered: 'bg-red-50 border-transparent',
     disabled: 'bg-transparent border-transparent',
-  },
-};
-
-const textStateClasses: Record<ButtonVariant, Record<ButtonState, string>> = {
-  contained: {
-    default: 'text-white',
-    pressed: 'text-white',
-    hovered: 'text-white',
-    disabled: 'text-gray-500',
-  },
-  outlined: {
-    default: 'text-red-600',
-    pressed: 'text-red-700',
-    hovered: 'text-red-700',
-    disabled: 'text-gray-400',
-  },
-  text: {
-    default: 'text-red-600',
-    pressed: 'text-red-700',
-    hovered: 'text-red-700',
-    disabled: 'text-gray-400',
   },
 };
 
