@@ -25,6 +25,7 @@ import {
 import { UBHButton } from './components/Button';
 import { Camera } from 'lucide-react-native';
 import { Typography, Body1, Caption, H1 } from './components/Typography';
+import { UBHIconButton } from './components/IconButton';
 import { SearchBar } from './components/SearchBar';
 
 function App() {
@@ -71,11 +72,11 @@ function AppContent() {
         onPress={() => Alert.alert('Button pressed')}
       />
 
-      <UBHButton
-        title="Pressed Me"
+      <UBHIconButton
         size="xl"
         variant="outlined"
-        onPress={() => Alert.alert('Button pressed')}
+        icon={Camera}
+        onPress={() => Alert.alert('Icon Button pressed')}
       />
 
       <View className="mt-6 w-full gap-3 px-5">
