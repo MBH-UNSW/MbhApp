@@ -28,6 +28,7 @@ import { Typography, Body1, Caption, H1 } from './components/Typography';
 import { UBHIconButton } from './components/IconButton';
 import { SearchBar } from './components/SearchBar';
 import { Input } from './components/Input';
+import { LoadingBar } from './components/LoadingBar';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -257,6 +258,23 @@ function AppContent() {
           onChangeText={() => { }}
           inputType="phone"
           visualState="disabled"
+        />
+      </View>
+
+      <View className="mt-6 w-full gap-3 px-5">
+        <LoadingBar progress={0} variant="neutral" />
+
+        <LoadingBar progress={100} variant="success" />
+
+        <LoadingBar progress={50} variant="warning" />
+
+        <LoadingBar progress={50} variant="error" />
+
+        <LoadingBar
+          progress={75}
+          variant="success"
+          showPercentage
+          helperText="Nearly done"
         />
       </View>
     </ScrollView>
