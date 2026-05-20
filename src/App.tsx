@@ -15,7 +15,7 @@ import {
   StyleSheet,
   useColorScheme,
   View,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import {
   SafeAreaProvider,
@@ -29,6 +29,9 @@ import { UBHIconButton } from './components/IconButton';
 import { SearchBar } from './components/SearchBar';
 import { Input } from './components/Input';
 import { LoadingBar } from './components/LoadingBar';
+import { FormControl } from './components/FormControl';
+import { RadioGroup } from './components/Radio';
+import { Checkbox } from './components/Checkbox';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -49,9 +52,15 @@ function AppContent() {
   const [numericValue, setNumericValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [phoneValue, setPhoneValue] = useState('');
+  const [radioOpt, setRadioOpt] = useState('');
+  const [checkOpts, setCheckOpts] = useState({
+    checkbox1: false,
+    checkbox2: false,
+  });
 
   return (
-    <ScrollView className="flex-1 bg-white"
+    <ScrollView
+      className="flex-1 bg-white"
       contentContainerStyle={{
         flexGrow: 1,
         alignItems: 'center',
@@ -59,7 +68,8 @@ function AppContent() {
         paddingHorizontal: 20,
         paddingTop: 90,
         paddingBottom: 30,
-      }}>
+      }}
+    >
       {/*<NewAppScreen
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
@@ -103,44 +113,44 @@ function AppContent() {
 
         <SearchBar
           value=""
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           placeholder="Disabled"
           visualState="disabled"
         />
 
         <SearchBar
           value=""
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           placeholder="Error"
           visualState="error"
         />
 
         <SearchBar
           value="Loading"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           placeholder="Loading"
           visualState="loading"
         />
       </View>
 
       <View className="mt-6 w-full gap-3 px-5">
-        <Input value={inputValue} onChangeText={setInputValue} placeholder="Enter text" />
-
         <Input
-          value="Text error"
-          onChangeText={() => { }}
-          visualState="error"
+          value={inputValue}
+          onChangeText={setInputValue}
+          placeholder="Enter text"
         />
+
+        <Input value="Text error" onChangeText={() => {}} visualState="error" />
 
         <Input
           value="Text loading"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="loading"
         />
 
         <Input
           value="Text cannot be entered"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="disabled"
         />
 
@@ -153,21 +163,25 @@ function AppContent() {
 
         <Input
           value={'Text error line 1\nText error line 2\nText error line 3'}
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="error"
           multiline
         />
 
         <Input
-          value={'Text loading line 1\nText loading line 2\nText loading line 3'}
-          onChangeText={() => { }}
+          value={
+            'Text loading line 1\nText loading line 2\nText loading line 3'
+          }
+          onChangeText={() => {}}
           visualState="loading"
           multiline
         />
 
         <Input
-          value={'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'}
-          onChangeText={() => { }}
+          value={
+            'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'
+          }
+          onChangeText={() => {}}
           visualState="disabled"
           multiline
         />
@@ -182,7 +196,7 @@ function AppContent() {
 
         <Input
           value="123456789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="numeric"
           showNumericControls
           visualState="error"
@@ -190,7 +204,7 @@ function AppContent() {
 
         <Input
           value="123456789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="numeric"
           showNumericControls
           visualState="loading"
@@ -198,7 +212,7 @@ function AppContent() {
 
         <Input
           value="12345678"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="numeric"
           showNumericControls
           visualState="disabled"
@@ -213,21 +227,21 @@ function AppContent() {
 
         <Input
           value="user@invalid"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="email"
           visualState="error"
         />
 
         <Input
           value="user@saving.com"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="email"
           visualState="loading"
         />
 
         <Input
           value="user@saving.com"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="email"
           visualState="disabled"
         />
@@ -241,21 +255,21 @@ function AppContent() {
 
         <Input
           value="+61 423 45"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="phone"
           visualState="error"
         />
 
         <Input
           value="+61 423 456 789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="phone"
           visualState="loading"
         />
 
         <Input
           value="+61 423 456 789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="phone"
           visualState="disabled"
         />
@@ -277,6 +291,48 @@ function AppContent() {
           helperText="Nearly done"
         />
       </View>
+
+      <FormControl
+        label="Choose your option"
+        helperText="Select one option"
+        error={!radioOpt ? 'This field is required' : undefined}
+        disabled
+        required
+      >
+        <RadioGroup
+          value={radioOpt}
+          onChange={setRadioOpt}
+          options={[
+            { label: 'Option 1', value: 'opt1' },
+            { label: 'Option 2', value: 'opt2' },
+          ]}
+          disabled
+        />
+      </FormControl>
+
+      <FormControl>
+        <Checkbox
+          checked={checkOpts.checkbox1}
+          onChange={checked =>
+            setCheckOpts(prev => ({
+              ...prev,
+              checkbox1: checked,
+            }))
+          }
+          label="Checkbox 1"
+        />
+
+        <Checkbox
+          checked={checkOpts.checkbox2}
+          onChange={checked =>
+            setCheckOpts(prev => ({
+              ...prev,
+              checkbox2: checked,
+            }))
+          }
+          label="Checkbox 2"
+        />
+      </FormControl>
     </ScrollView>
   );
 }
