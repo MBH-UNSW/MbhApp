@@ -32,6 +32,7 @@ import { LoadingBar } from './components/LoadingBar';
 import { FormControl } from './components/FormControl';
 import { RadioGroup } from './components/Radio';
 import { Checkbox } from './components/Checkbox';
+import { FileUpload } from './components/FileUpload';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -113,21 +114,21 @@ function AppContent() {
 
         <SearchBar
           value=""
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           placeholder="Disabled"
           visualState="disabled"
         />
 
         <SearchBar
           value=""
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           placeholder="Error"
           visualState="error"
         />
 
         <SearchBar
           value="Loading"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           placeholder="Loading"
           visualState="loading"
         />
@@ -140,17 +141,17 @@ function AppContent() {
           placeholder="Enter text"
         />
 
-        <Input value="Text error" onChangeText={() => {}} visualState="error" />
+        <Input value="Text error" onChangeText={() => { }} visualState="error" />
 
         <Input
           value="Text loading"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           visualState="loading"
         />
 
         <Input
           value="Text cannot be entered"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           visualState="disabled"
         />
 
@@ -163,7 +164,7 @@ function AppContent() {
 
         <Input
           value={'Text error line 1\nText error line 2\nText error line 3'}
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           visualState="error"
           multiline
         />
@@ -172,7 +173,7 @@ function AppContent() {
           value={
             'Text loading line 1\nText loading line 2\nText loading line 3'
           }
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           visualState="loading"
           multiline
         />
@@ -181,7 +182,7 @@ function AppContent() {
           value={
             'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'
           }
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           visualState="disabled"
           multiline
         />
@@ -196,7 +197,7 @@ function AppContent() {
 
         <Input
           value="123456789"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="numeric"
           showNumericControls
           visualState="error"
@@ -204,7 +205,7 @@ function AppContent() {
 
         <Input
           value="123456789"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="numeric"
           showNumericControls
           visualState="loading"
@@ -212,7 +213,7 @@ function AppContent() {
 
         <Input
           value="12345678"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="numeric"
           showNumericControls
           visualState="disabled"
@@ -227,21 +228,21 @@ function AppContent() {
 
         <Input
           value="user@invalid"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="email"
           visualState="error"
         />
 
         <Input
           value="user@saving.com"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="email"
           visualState="loading"
         />
 
         <Input
           value="user@saving.com"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="email"
           visualState="disabled"
         />
@@ -255,21 +256,21 @@ function AppContent() {
 
         <Input
           value="+61 423 45"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="phone"
           visualState="error"
         />
 
         <Input
           value="+61 423 456 789"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="phone"
           visualState="loading"
         />
 
         <Input
           value="+61 423 456 789"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           inputType="phone"
           visualState="disabled"
         />
@@ -333,6 +334,36 @@ function AppContent() {
           label="Checkbox 2"
         />
       </FormControl>
+
+      <View className="mt-6 w-full gap-3 px-5">
+        <FileUpload mode="click" status="empty" />
+
+        <FileUpload mode="drag" status="empty" />
+
+        <FileUpload mode="camera" status="empty" />
+
+        <FileUpload
+          status="uploading"
+          fileName="filename.jpg"
+          progress={75}
+        />
+
+        <FileUpload
+          status="uploading"
+          fileName="filename.jpg"
+          showFileIcon={false}
+          progress={75}
+        />
+
+        <FileUpload
+          status="success"
+          fileName="filename.jpg"
+        />
+
+        <FileUpload
+          status="error"
+        />
+      </View>
     </ScrollView>
   );
 }
