@@ -33,6 +33,7 @@ import { FormControl } from './components/FormControl';
 import { RadioGroup } from './components/Radio';
 import { Checkbox } from './components/Checkbox';
 import { Dropdown } from './components/Dropdown';
+import { Pill } from './components/Pill';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -350,6 +351,22 @@ function AppContent() {
             { label: 'Item 4', value: 'item-4' },
           ]}
           onChange={value => setItem(value)}
+        />
+      </View>
+
+      <View className="mt-6 w-full gap-3 px-5">
+        <Pill
+          label="Emergency"
+          color="#FF413A"
+          className=""
+          textClassName="text-[16px]"
+        />
+        <Pill
+          label="Archive"
+          color="#9E9E9E"
+          variant="outline"
+          className="w-full font-semibold"
+          textClassName="text-[12px] font-semibold"
         />
       </View>
     </ScrollView>
