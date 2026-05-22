@@ -32,6 +32,7 @@ import { LoadingBar } from './components/LoadingBar';
 import { FormControl } from './components/FormControl';
 import { RadioGroup } from './components/Radio';
 import { Checkbox } from './components/Checkbox';
+import { Dropdown } from './components/Dropdown';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -57,6 +58,8 @@ function AppContent() {
     checkbox1: false,
     checkbox2: false,
   });
+
+  const [item, setItem] = useState('');
 
   return (
     <ScrollView
@@ -99,7 +102,7 @@ function AppContent() {
 
       <UBHIconButton
         size="xl"
-        variant="outlined"
+        variant="contained"
         icon={Camera}
         onPress={() => Alert.alert('Icon Button pressed')}
       />
@@ -292,47 +295,63 @@ function AppContent() {
         />
       </View>
 
-      <FormControl
-        label="Choose your option"
-        helperText="Select one option"
-        error={!radioOpt ? 'This field is required' : undefined}
-        disabled
-        required
-      >
-        <RadioGroup
-          value={radioOpt}
-          onChange={setRadioOpt}
-          options={[
-            { label: 'Option 1', value: 'opt1' },
-            { label: 'Option 2', value: 'opt2' },
-          ]}
+      <View className="mt-6 w-full gap-3 px-5">
+        <FormControl
+          label="Choose your option"
+          helperText="Select one option"
+          error={!radioOpt ? 'This field is required' : undefined}
           disabled
-        />
-      </FormControl>
+          required
+        >
+          <RadioGroup
+            value={radioOpt}
+            onChange={setRadioOpt}
+            options={[
+              { label: 'Option 1', value: 'opt1' },
+              { label: 'Option 2', value: 'opt2' },
+            ]}
+            disabled
+          />
+        </FormControl>
 
-      <FormControl>
-        <Checkbox
-          checked={checkOpts.checkbox1}
-          onChange={checked =>
-            setCheckOpts(prev => ({
-              ...prev,
-              checkbox1: checked,
-            }))
-          }
-          label="Checkbox 1"
-        />
+        <FormControl>
+          <Checkbox
+            checked={checkOpts.checkbox1}
+            onChange={checked =>
+              setCheckOpts(prev => ({
+                ...prev,
+                checkbox1: checked,
+              }))
+            }
+            label="Checkbox 1"
+          />
 
-        <Checkbox
-          checked={checkOpts.checkbox2}
-          onChange={checked =>
-            setCheckOpts(prev => ({
-              ...prev,
-              checkbox2: checked,
-            }))
-          }
-          label="Checkbox 2"
+          <Checkbox
+            checked={checkOpts.checkbox2}
+            onChange={checked =>
+              setCheckOpts(prev => ({
+                ...prev,
+                checkbox2: checked,
+              }))
+            }
+            label="Checkbox 2"
+          />
+        </FormControl>
+      </View>
+
+      <View className="mt-6 w-full gap-3 px-5">
+        <Dropdown
+          value={item}
+          placeholder="Select an item"
+          options={[
+            { label: 'Item 1', value: 'item-1' },
+            { label: 'Item 2', value: 'item-2' },
+            { label: 'Item 3', value: 'item-3' },
+            { label: 'Item 4', value: 'item-4' },
+          ]}
+          onChange={value => setItem(value)}
         />
-      </FormControl>
+      </View>
     </ScrollView>
   );
 }
