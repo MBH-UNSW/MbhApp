@@ -35,6 +35,7 @@ import { Checkbox } from './components/Checkbox';
 import { Dropdown } from './components/Dropdown';
 import { Pill } from './components/Pill';
 import { FileUpload, type SelectedUploadFile } from './components/FileUpload';
+import { Avatar } from './components/Avatar';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -409,6 +410,14 @@ function AppContent() {
         />
 
         <FileUpload status="error" />
+      </View>
+      <View className="mt-6 w-full gap-3 px-5">
+        <View className="flex-row items-center gap-7">
+          <Avatar initials="AR" size="sm" />
+          <Avatar initials="AR" size="md" />
+          <Avatar initials="AR" size="lg" />
+          <Avatar initials="AR" size="xl" />
+        </View>
       </View>
     </ScrollView>
   );
