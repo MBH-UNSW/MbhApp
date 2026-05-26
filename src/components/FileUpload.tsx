@@ -58,9 +58,15 @@ export function FileUpload({
     const isSuccess = status === 'success';
     const isError = status === 'error';
 
+    const canSelectFile = status === 'empty' || status === 'error';
+
     const displayFileName = fileName ?? 'Selected file';
 
     const handlePress = async () => {
+        if (!canSelectFile) {
+            return;
+        }
+
         onPress?.();
 
         if (mode === 'camera') {
@@ -132,6 +138,7 @@ export function FileUpload({
             onPress={handlePress}
             accessibilityRole="button"
             accessibilityLabel={accessibilityLabels[status]}
+            accessibilityState={{ disabled: !canSelectFile }}
             className={cn(
                 'min-h-[64px] w-full flex-row items-center rounded-[8px] border px-4 py-3',
                 statusClasses[status],
