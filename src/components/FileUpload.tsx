@@ -1,14 +1,27 @@
+import {
+    errorCodes,
+    isErrorWithCode,
+    pick,
+} from '@react-native-documents/picker';
+import { launchCamera } from 'react-native-image-picker';
 import { Camera, Check, File, Upload } from 'lucide-react-native';
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { Alert, Pressable, View } from 'react-native';
 
 import { ClearIcon, type ClearIconVariant } from './icons/ClearIcon';
 import { ErrorIcon } from './icons/ErrorIcon';
 import { LoadingBar } from './LoadingBar';
 import { Typography } from './Typography';
 
-type FileUploadMode = 'click' | 'drag' | 'camera';
+type FileUploadMode = 'file' | 'camera';
 type FileUploadStatus = 'empty' | 'uploading' | 'success' | 'error';
+
+export type SelectedUploadFile = {
+    uri?: string;
+    name?: string;
+    type?: string;
+    size?: number;
+};
 
 type FileUploadProps = {
     mode?: FileUploadMode;
@@ -18,6 +31,7 @@ type FileUploadProps = {
     showFileIcon?: boolean;
     showClearButton?: boolean;
     clearIconVariant?: ClearIconVariant;
+    onFileSelected?: (file: SelectedUploadFile) => void;
     onPress?: () => void;
     onClear?: () => void;
     className?: string;
@@ -27,13 +41,14 @@ const cn = (...classes: Array<string | false | undefined | null>) =>
     classes.filter(Boolean).join(' ');
 
 export function FileUpload({
-    mode = 'click',
+    mode = 'file',
     status = 'empty',
-    fileName = 'filename.jpg',
+    fileName,
     progress,
     showFileIcon = true,
     showClearButton = true,
     clearIconVariant = 'subtle',
+    onFileSelected,
     onPress,
     onClear,
     className,
@@ -43,9 +58,78 @@ export function FileUpload({
     const isSuccess = status === 'success';
     const isError = status === 'error';
 
+    const displayFileName = fileName ?? 'Selected file';
+
+    const handlePress = async () => {
+        onPress?.();
+
+        if (mode === 'camera') {
+            await openCamera();
+            return;
+        }
+
+        await openFilePicker();
+    };
+
+    const openFilePicker = async () => {
+        try {
+            const [file] = await pick({
+                allowMultiSelection: false,
+                mode: 'import',
+            });
+
+            onFileSelected?.({
+                uri: file.uri,
+                name: file.name ?? undefined,
+                type: file.type ?? undefined,
+                size: file.size ?? undefined,
+            });
+        } catch (error) {
+            if (
+                isErrorWithCode(error) &&
+                error.code === errorCodes.OPERATION_CANCELED
+            ) {
+                return;
+            }
+
+            Alert.alert('File upload error', 'Unable to select a file.');
+        }
+    };
+
+    const openCamera = async () => {
+        const result = await launchCamera({
+            mediaType: 'photo',
+        });
+
+        if (result.didCancel) {
+            return;
+        }
+
+        if (result.errorCode) {
+            Alert.alert(
+                'Camera error',
+                result.errorMessage ?? 'Unable to open camera (cus its unavailable in xcode simulator).',
+            );
+            return;
+        }
+
+        const asset = result.assets?.[0];
+
+        if (!asset) {
+            return;
+        }
+
+        onFileSelected?.({
+            uri: asset.uri,
+            name: asset.fileName,
+            type: asset.type,
+            size: asset.fileSize,
+        });
+    };
+
     return (
         <Pressable
-            onPress={onPress}
+            onPress={handlePress}
             accessibilityRole="button"
             accessibilityLabel={accessibilityLabels[status]}
             className={cn(
@@ -66,7 +150,7 @@ export function FileUpload({
 
                     <View className="flex-1">
                         <Typography variant="body2" weight="semibold">
-                            {fileName}
+                            {displayFileName}
                         </Typography>
 
                         <LoadingBar
@@ -100,7 +184,7 @@ export function FileUpload({
                         </Typography>
 
                         <Typography variant="caption" weight="semibold" color="secondary">
-                            {fileName}
+                            {displayFileName}
                         </Typography>
                     </View>
                 </>
@@ -168,13 +252,9 @@ const emptyUploadCopy: Record<
         subtitle: string;
     }
 > = {
-    click: {
-        title: 'Click to browse',
-        subtitle: 'Or drag & drop',
-    },
-    drag: {
-        title: 'Drag & drop a file here',
-        subtitle: 'Or click to browse',
+    file: {
+        title: 'Click to browse files',
+        subtitle: 'Upload from your device',
     },
     camera: {
         title: 'Take a photo',
