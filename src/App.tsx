@@ -34,6 +34,7 @@ import { RadioGroup } from './components/Radio';
 import { Checkbox } from './components/Checkbox';
 import { Dropdown } from './components/Dropdown';
 import { Pill } from './components/Pill';
+import { Toggle } from './components/Toggle';
 import { FileUpload, type SelectedUploadFile } from './components/FileUpload';
 import { Avatar } from './components/Avatar';
 
@@ -61,6 +62,8 @@ function AppContent() {
     checkbox1: false,
     checkbox2: false,
   });
+  const [dropdownItem, setDropdownItem] = useState('');
+  const [toggleEnabled, setToggleEnabled] = useState(false);
   const [selectedFile, setSelectedFile] = useState<SelectedUploadFile | null>(null);
   const [cameraFile, setCameraFile] = useState<SelectedUploadFile | null>(null);
 
@@ -346,7 +349,7 @@ function AppContent() {
 
       <View className="mt-6 w-full gap-3 px-5">
         <Dropdown
-          value={item}
+          value={dropdownItem}
           placeholder="Select an item"
           options={[
             { label: 'Item 1', value: 'item-1' },
@@ -354,7 +357,7 @@ function AppContent() {
             { label: 'Item 3', value: 'item-3' },
             { label: 'Item 4', value: 'item-4' },
           ]}
-          onChange={value => setItem(value)}
+          onChange={value => setDropdownItem(value)}
         />
       </View>
 
@@ -374,6 +377,23 @@ function AppContent() {
         />
       </View>
 
+      <View className="mt-6 w-full gap-3 px-5 flex-row">
+        <Toggle value={toggleEnabled} onChange={setToggleEnabled} />
+        <Toggle
+          value={toggleEnabled}
+          onChange={setToggleEnabled}
+          className="h-[40px] w-[72px] p-[4px]"
+          thumbClassName="h-[32px] w-[32px]"
+          disabled
+        />
+        <Toggle
+          value={toggleEnabled}
+          onChange={setToggleEnabled}
+          activeColor="#39D0A7"
+          inactiveColor="#FFDE21"
+          thumbColor="#C30010"
+        />
+      </View>
       <View className="mt-6 w-full gap-3 px-5">
         <FileUpload
           mode="file"
