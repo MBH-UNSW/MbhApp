@@ -5,10 +5,12 @@ import { Typography } from './Typography';
 
 type LoadingBarVariant = 'success' | 'warning' | 'error' | 'neutral';
 type LoadingBarTextColor = 'primary' | 'secondary' | 'alert';
+type LoadingBarSize = 'sm' | 'md';
 
 type LoadingBarProps = {
     progress: number;
     variant?: LoadingBarVariant;
+    size?: LoadingBarSize;
     label?: string;
     helperText?: string;
     showPercentage?: boolean;
@@ -23,6 +25,7 @@ const cn = (...classes: Array<string | false | undefined | null>) =>
 export function LoadingBar({
     progress,
     variant = 'success',
+    size = 'md',
     label,
     helperText,
     showPercentage = false,
@@ -44,7 +47,7 @@ export function LoadingBar({
         <View className={cn('w-full gap-2', className)}>
             {displayLabel && (
                 <Typography
-                    variant="body2"
+                    variant="body1"
                     color={labelColor}
                     align="center"
                 >
@@ -53,7 +56,10 @@ export function LoadingBar({
             )}
 
             <View
-                className="h-[18px] w-full overflow-hidden rounded-full bg-neutral-300"
+                className={cn(
+                    'w-full overflow-hidden rounded-full bg-neutral-300',
+                    sizeClasses[size],
+                )}
                 accessibilityRole="progressbar"
                 accessibilityValue={{
                     min: 0,
@@ -82,6 +88,11 @@ export function LoadingBar({
         </View>
     );
 }
+
+const sizeClasses: Record<LoadingBarSize, string> = {
+    sm: 'h-[6px]',
+    md: 'h-[18px]',
+};
 
 const fillClasses: Record<LoadingBarVariant, string> = {
     success: 'bg-green-500',
