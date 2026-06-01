@@ -37,6 +37,7 @@ import { Pill } from './components/Pill';
 import { Toggle } from './components/Toggle';
 import { FileUpload, type SelectedUploadFile } from './components/FileUpload';
 import { Avatar } from './components/Avatar';
+import { Pagination } from './components/Pagination';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -66,6 +67,7 @@ function AppContent() {
   const [toggleEnabled, setToggleEnabled] = useState(false);
   const [selectedFile, setSelectedFile] = useState<SelectedUploadFile | null>(null);
   const [cameraFile, setCameraFile] = useState<SelectedUploadFile | null>(null);
+  const [currentPage, setCurrentPage] = useState(3);
 
   const [item, setItem] = useState('');
 
@@ -431,6 +433,7 @@ function AppContent() {
 
         <FileUpload status="error" />
       </View>
+
       <View className="mt-6 w-full gap-3 px-5">
         <View className="flex-row items-center gap-7">
           <Avatar initials="AR" size="sm" />
@@ -438,6 +441,14 @@ function AppContent() {
           <Avatar initials="AR" size="lg" />
           <Avatar initials="AR" size="xl" />
         </View>
+      </View>
+
+      <View className="mt-6 w-full gap-3 px-5">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={5}
+          onPageChange={setCurrentPage}
+        />
       </View>
     </ScrollView>
   );
