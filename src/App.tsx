@@ -22,10 +22,20 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import { UBHButton } from './components/Button';
+import { Button } from './components/Button';
 import { Camera } from 'lucide-react-native';
-import { Typography, Body1, Caption, H1 } from './components/Typography';
-import { UBHIconButton } from './components/IconButton';
+import {
+  Typography,
+  Body1,
+  Caption,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  Body2,
+} from './components/Typography';
+import { IconButton } from './components/IconButton';
 import { SearchBar } from './components/SearchBar';
 import { Input } from './components/Input';
 import { LoadingBar } from './components/LoadingBar';
@@ -74,6 +84,7 @@ function AppContent() {
 
   const [item, setItem] = useState('');
   const [digitPasscode, setDigitPasscode] = useState('');
+  const btnSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
   return (
     <ScrollView
@@ -91,35 +102,151 @@ function AppContent() {
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
       />*/}
+      <H3>Welcome to</H3>
+      <H1>UBH Components</H1>
 
-      <H1>Hello UBH</H1>
-      <Body1 color="alert">This is normal text.</Body1>
-      <Caption color="primary">caption caption hehehe</Caption>
-      <Typography variant="body2" customColor="#7C3AED" underline italic>
-        Custom purple text
-      </Typography>
+      <View className="pt-6 pb-2 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Typography</H3>
+        <View className="gap-3">
+          <H1>Heading 1</H1>
+          <H2>Heading 2</H2>
+          <H3>Heading 3</H3>
+          <H4>Heading 4</H4>
+          <H5>Heading 5</H5>
+          <Body1>Body 1</Body1>
+          <Body2>Body 2</Body2>
+          <Caption>Caption</Caption>
+          <Caption color="alert">Caption with alternative color</Caption>
+          <Typography variant="body1" customColor="#7C3AED" underline italic>
+            Custom purple text
+          </Typography>
+        </View>
+      </View>
 
-      <UBHButton
-        title="Cancel"
-        variant="outlined"
-        onPress={() => Alert.alert('Button pressed')}
-      />
+      <View className="my-4 h-px w-full bg-gray-400" />
 
-      <UBHButton
-        title="Cancel"
-        variant="outlined"
-        size="sm"
-        iconLeft={Camera}
-        iconRight={Camera}
-        onPress={() => Alert.alert('Button pressed')}
-      />
+      <View className="py-2 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Buttons</H3>
+        <View>
+          <H5>Contained Buttons (default)</H5>
+          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+            {btnSizes.map(size => (
+              <Button
+                key={size}
+                title="Button"
+                variant="contained"
+                size={size}
+                onPress={() => Alert.alert(`${size} button pressed`)}
+              />
+            ))}
+          </ScrollView>
+        </View>
+        <View>
+          <H5>Outlined Buttons</H5>
+          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+            {btnSizes.map(size => (
+              <Button
+                key={size}
+                title="Button"
+                variant="outlined"
+                size={size}
+                onPress={() => Alert.alert(`${size} button pressed`)}
+              />
+            ))}
+          </ScrollView>
+        </View>
+        <View>
+          <H5>Text Buttons</H5>
+          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+            {btnSizes.map(size => (
+              <Button
+                key={size}
+                title="Button"
+                variant="text"
+                size={size}
+                onPress={() => Alert.alert(`${size} button pressed`)}
+              />
+            ))}
+          </ScrollView>
+        </View>
+        <View>
+          <H5>Buttons with icon</H5>
+          <View className="mt-3 gap-3 flex-row">
+            <Button
+              title="Left Icon Button"
+              variant="contained"
+              size="sm"
+              iconLeft={Camera}
+              onPress={() => Alert.alert('left icon button pressed')}
+            />
+            <Button
+              title="Right Icon Button"
+              variant="contained"
+              size="sm"
+              iconRight={Camera}
+              onPress={() => Alert.alert('right icon button pressed')}
+            />
+          </View>
+        </View>
+        <View>
+          <H5>Full-length Button</H5>
+          <View className="mt-3">
+            <Button
+              title="Full-length Button"
+              variant="contained"
+              size="sm"
+              onPress={() => Alert.alert('button pressed')}
+            />
+          </View>
+        </View>
+      </View>
 
-      <UBHIconButton
-        size="xl"
-        variant="contained"
-        icon={Camera}
-        onPress={() => Alert.alert('Icon Button pressed')}
-      />
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-2 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Icon Buttons</H3>
+        <View>
+          <H5>Contained Icon Buttons</H5>
+          <View className="gap-3 items-center flex-row">
+            {btnSizes.map(size => (
+              <IconButton
+                size={size}
+                variant="contained"
+                icon={Camera}
+                onPress={() => Alert.alert('${size} icon button pressed')}
+              />
+            ))}
+          </View>
+        </View>
+        <View>
+          <H5>Outlined Icon Buttons</H5>
+          <View className="gap-3 items-center flex-row">
+            {btnSizes.map(size => (
+              <IconButton
+                size={size}
+                variant="outlined"
+                icon={Camera}
+                onPress={() => Alert.alert('${size} icon button pressed')}
+              />
+            ))}
+          </View>
+        </View>
+        <View>
+          <H5>Text Icon Buttons</H5>
+          <View className="gap-3 items-center flex-row">
+            {btnSizes.map(size => (
+              <IconButton
+                size={size}
+                variant="text"
+                icon={Camera}
+                onPress={() => Alert.alert('${size} icon button pressed')}
+              />
+            ))}
+          </View>
+        </View>
+      </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
 
       <View className="mt-6 w-full gap-3 px-5">
         <SearchBar
@@ -457,7 +584,7 @@ function AppContent() {
           }}
         />
       </View>
-      
+
       <View className="mt-6 w-full gap-3 px-5">
         <Pagination
           currentPage={currentPage}
