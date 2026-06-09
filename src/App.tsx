@@ -102,10 +102,12 @@ function AppContent() {
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
       />*/}
-      <H3>Welcome to</H3>
-      <H1>UBH Components</H1>
+      <View className="py-2 items-center">
+        <H3>Welcome to</H3>
+        <H1>UBH Components</H1>
+      </View>
 
-      <View className="pt-6 pb-2 w-full gap-3 px-5">
+      <View className="py-5 w-full gap-3 px-5">
         <H3 customColor="#c40904">Typography</H3>
         <View className="gap-3">
           <H1>Heading 1</H1>
@@ -125,14 +127,13 @@ function AppContent() {
 
       <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="py-2 w-full gap-3 px-5">
+      <View className="py-5 w-full gap-3 px-5">
         <H3 customColor="#c40904">Buttons</H3>
         <View>
           <H5>Contained Buttons (default)</H5>
           <ScrollView horizontal contentContainerClassName="gap-3 items-center">
             {btnSizes.map(size => (
               <Button
-                key={size}
                 title="Button"
                 variant="contained"
                 size={size}
@@ -146,7 +147,6 @@ function AppContent() {
           <ScrollView horizontal contentContainerClassName="gap-3 items-center">
             {btnSizes.map(size => (
               <Button
-                key={size}
                 title="Button"
                 variant="outlined"
                 size={size}
@@ -160,7 +160,6 @@ function AppContent() {
           <ScrollView horizontal contentContainerClassName="gap-3 items-center">
             {btnSizes.map(size => (
               <Button
-                key={size}
                 title="Button"
                 variant="text"
                 size={size}
@@ -203,7 +202,7 @@ function AppContent() {
 
       <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="py-2 w-full gap-3 px-5">
+      <View className="py-5 w-full gap-3 px-5">
         <H3 customColor="#c40904">Icon Buttons</H3>
         <View>
           <H5>Contained Icon Buttons</H5>
@@ -436,26 +435,53 @@ function AppContent() {
         />
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
-        <FormControl
-          label="Choose your option"
-          helperText="Select one option"
-          error={!radioOpt ? 'This field is required' : undefined}
-          disabled
-          required
-        >
-          <RadioGroup
-            value={radioOpt}
-            onChange={setRadioOpt}
-            options={[
-              { label: 'Option 1', value: 'opt1' },
-              { label: 'Option 2', value: 'opt2' },
-            ]}
-            disabled
-          />
-        </FormControl>
+      <View className="my-4 h-px w-full bg-gray-400" />
 
-        <FormControl>
+      <View className="py-5 w-full gap-5 px-5">
+        <H3 customColor="#c40904">Radio</H3>
+        <View className="gap-1">
+          <H5>Radio Group</H5>
+          <FormControl
+            label="Choose your option"
+            helperText="Select one option"
+            error={!radioOpt ? 'This field is required' : undefined}
+            required
+          >
+            <RadioGroup
+              value={radioOpt}
+              onChange={setRadioOpt}
+              options={[
+                { label: 'Option 1', value: 'opt1' },
+                { label: 'Option 2', value: 'opt2' },
+              ]}
+            />
+          </FormControl>
+        </View>
+        <View className="gap-1">
+          <H5>Disabled Radio Group</H5>
+          <FormControl
+            label="Choose your option"
+            helperText="Select one option"
+            disabled
+          >
+            <RadioGroup
+              value={radioOpt}
+              onChange={setRadioOpt}
+              options={[
+                { label: 'Option 1', value: 'opt1' },
+                { label: 'Option 2', value: 'opt2' },
+              ]}
+              disabled
+            />
+          </FormControl>
+        </View>
+      </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Checkbox</H3>
+        <FormControl label="Select your option">
           <Checkbox
             checked={checkOpts.checkbox1}
             onChange={checked =>
@@ -466,7 +492,6 @@ function AppContent() {
             }
             label="Checkbox 1"
           />
-
           <Checkbox
             checked={checkOpts.checkbox2}
             onChange={checked =>
@@ -480,7 +505,10 @@ function AppContent() {
         </FormControl>
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Dropdown</H3>
         <Dropdown
           value={dropdownItem}
           placeholder="Select an item"
@@ -494,39 +522,60 @@ function AppContent() {
         />
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
-        <Pill
-          label="Emergency"
-          color="#FF413A"
-          className=""
-          textClassName="text-[16px]"
-        />
-        <Pill
-          label="Archive"
-          color="#9E9E9E"
-          variant="outline"
-          className="w-full font-semibold"
-          textClassName="text-[12px] font-semibold"
-        />
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Pills</H3>
+        <H5>Variants</H5>
+        <View className="flex-row gap-3">
+          <Pill
+            label="Emergency"
+            color="#FF413A"
+            className=""
+            textClassName="text-[16px]"
+          />
+          <Pill
+            label="Archive"
+            color="#9E9E9E"
+            variant="outline"
+            className="font-semibold"
+            textClassName="text-[12px] font-semibold"
+          />
+        </View>
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5 flex-row">
-        <Toggle value={toggleEnabled} onChange={setToggleEnabled} />
-        <Toggle
-          value={toggleEnabled}
-          onChange={setToggleEnabled}
-          className="h-[40px] w-[72px] p-[4px]"
-          thumbClassName="h-[32px] w-[32px]"
-          disabled
-        />
-        <Toggle
-          value={toggleEnabled}
-          onChange={setToggleEnabled}
-          activeColor="#39D0A7"
-          inactiveColor="#FFDE21"
-          thumbColor="#C30010"
-        />
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Toggles</H3>
+        <View className="flex-row items-center justify-between">
+          <H5>Default</H5>
+          <Toggle value={toggleEnabled} onChange={setToggleEnabled} />
+        </View>
+        <View className="flex-row items-center justify-between">
+          <H5>Custom size</H5>
+          <Toggle
+            value={toggleEnabled}
+            onChange={setToggleEnabled}
+            className="h-[40px] w-[72px] p-[4px]"
+            thumbClassName="h-[32px] w-[32px]"
+            disabled
+          />
+        </View>
+        <View className="flex-row items-center justify-between">
+          <H5>Custom color</H5>
+          <Toggle
+            value={toggleEnabled}
+            onChange={setToggleEnabled}
+            activeColor="#39D0A7"
+            inactiveColor="#FFDE21"
+            thumbColor="#C30010"
+          />
+        </View>
       </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
+
       <View className="mt-6 w-full gap-3 px-5">
         <FileUpload
           mode="file"
@@ -575,6 +624,17 @@ function AppContent() {
       </View>
 
       <View className="mt-6 w-full gap-3 px-5">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={5}
+          onPageChange={setCurrentPage}
+        />
+      </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Digit Password</H3>
         <DigitInputGroup
           length={4}
           value={digitPasscode}
@@ -582,14 +642,6 @@ function AppContent() {
           onComplete={code => {
             console.log('Completed:', code);
           }}
-        />
-      </View>
-
-      <View className="mt-6 w-full gap-3 px-5">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={5}
-          onPageChange={setCurrentPage}
         />
       </View>
     </ScrollView>
