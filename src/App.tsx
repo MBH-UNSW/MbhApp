@@ -132,40 +132,118 @@ function AppContent() {
         <View>
           <H5>Contained Buttons (default)</H5>
           <ScrollView horizontal contentContainerClassName="gap-3 items-center">
-            {btnSizes.map(size => (
-              <Button
-                title="Button"
-                variant="contained"
-                size={size}
-                onPress={() => Alert.alert(`${size} button pressed`)}
-              />
-            ))}
+            <Button
+              title="Button"
+              variant="contained"
+              size="xs"
+              onPress={() => Alert.alert('xs button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="contained"
+              size="sm"
+              onPress={() => Alert.alert('sm button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="contained"
+              size="md"
+              onPress={() => Alert.alert('md button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="contained"
+              size="lg"
+              onPress={() => Alert.alert('lg button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="contained"
+              size="xl"
+              onPress={() => Alert.alert('xl button pressed')}
+            />
           </ScrollView>
         </View>
         <View>
           <H5>Outlined Buttons</H5>
           <ScrollView horizontal contentContainerClassName="gap-3 items-center">
-            {btnSizes.map(size => (
-              <Button
-                title="Button"
-                variant="outlined"
-                size={size}
-                onPress={() => Alert.alert(`${size} button pressed`)}
-              />
-            ))}
+            <Button
+              title="Button"
+              variant="outlined"
+              size="xs"
+              onPress={() => Alert.alert('xs outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="sm"
+              onPress={() => Alert.alert('sm outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="md"
+              onPress={() => Alert.alert('md outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="lg"
+              onPress={() => Alert.alert('lg outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="xl"
+              onPress={() => Alert.alert('xl outlined button pressed')}
+            />
           </ScrollView>
         </View>
         <View>
           <H5>Text Buttons</H5>
           <ScrollView horizontal contentContainerClassName="gap-3 items-center">
-            {btnSizes.map(size => (
-              <Button
-                title="Button"
-                variant="text"
-                size={size}
-                onPress={() => Alert.alert(`${size} button pressed`)}
-              />
-            ))}
+            <Button
+              title="Button"
+              variant="text"
+              size="xs"
+              onPress={() => Alert.alert('xs text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="sm"
+              onPress={() => Alert.alert('sm text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="md"
+              onPress={() => Alert.alert('md text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="lg"
+              onPress={() => Alert.alert('lg text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="xl"
+              onPress={() => Alert.alert('xl text button pressed')}
+            />
           </ScrollView>
         </View>
         <View>
@@ -207,40 +285,118 @@ function AppContent() {
         <View>
           <H5>Contained Icon Buttons</H5>
           <View className="gap-3 items-center flex-row">
-            {btnSizes.map(size => (
-              <IconButton
-                size={size}
-                variant="contained"
-                icon={Camera}
-                onPress={() => Alert.alert('${size} icon button pressed')}
-              />
-            ))}
+            <IconButton
+              size="xs"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('xs icon button pressed')}
+            />
+
+            <IconButton
+              size="sm"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('sm icon button pressed')}
+            />
+
+            <IconButton
+              size="md"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('md icon button pressed')}
+            />
+
+            <IconButton
+              size="lg"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('lg icon button pressed')}
+            />
+
+            <IconButton
+              size="xl"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('xl icon button pressed')}
+            />
           </View>
         </View>
         <View>
           <H5>Outlined Icon Buttons</H5>
           <View className="gap-3 items-center flex-row">
-            {btnSizes.map(size => (
-              <IconButton
-                size={size}
-                variant="outlined"
-                icon={Camera}
-                onPress={() => Alert.alert('${size} icon button pressed')}
-              />
-            ))}
+            <IconButton
+              size="xs"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('xs outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="sm"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('sm outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="md"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('md outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="lg"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('lg outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="xl"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('xl outlined icon button pressed')}
+            />
           </View>
         </View>
         <View>
           <H5>Text Icon Buttons</H5>
           <View className="gap-3 items-center flex-row">
-            {btnSizes.map(size => (
-              <IconButton
-                size={size}
-                variant="text"
-                icon={Camera}
-                onPress={() => Alert.alert('${size} icon button pressed')}
-              />
-            ))}
+            <IconButton
+              size="xs"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('xs text icon button pressed')}
+            />
+
+            <IconButton
+              size="sm"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('sm text icon button pressed')}
+            />
+
+            <IconButton
+              size="md"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('md text icon button pressed')}
+            />
+
+            <IconButton
+              size="lg"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('lg text icon button pressed')}
+            />
+
+            <IconButton
+              size="xl"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('xl text icon button pressed')}
+            />
           </View>
         </View>
       </View>
