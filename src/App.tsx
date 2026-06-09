@@ -38,6 +38,7 @@ import { Toggle } from './components/Toggle';
 import { FileUpload, type SelectedUploadFile } from './components/FileUpload';
 import { Avatar } from './components/Avatar';
 import { DigitInputGroup } from './components/DigitInput';
+import { Pagination } from './components/Pagination';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -69,9 +70,10 @@ function AppContent() {
     null,
   );
   const [cameraFile, setCameraFile] = useState<SelectedUploadFile | null>(null);
+  const [currentPage, setCurrentPage] = useState(3);
 
   const [item, setItem] = useState('');
-  const [digitPasscode, setDigitPasscode] = useState("");
+  const [digitPasscode, setDigitPasscode] = useState('');
 
   return (
     <ScrollView
@@ -435,6 +437,7 @@ function AppContent() {
 
         <FileUpload status="error" />
       </View>
+
       <View className="mt-6 w-full gap-3 px-5">
         <View className="flex-row items-center gap-7">
           <Avatar initials="AR" size="sm" />
@@ -452,6 +455,14 @@ function AppContent() {
           onComplete={code => {
             console.log('Completed:', code);
           }}
+        />
+      </View>
+      
+      <View className="mt-6 w-full gap-3 px-5">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={5}
+          onPageChange={setCurrentPage}
         />
       </View>
     </ScrollView>
