@@ -37,6 +37,7 @@ import { Pill } from './components/Pill';
 import { Toggle } from './components/Toggle';
 import { FileUpload, type SelectedUploadFile } from './components/FileUpload';
 import { Avatar } from './components/Avatar';
+import { DigitInputGroup } from './components/DigitInput';
 import { Pagination } from './components/Pagination';
 
 function App() {
@@ -65,11 +66,14 @@ function AppContent() {
   });
   const [dropdownItem, setDropdownItem] = useState('');
   const [toggleEnabled, setToggleEnabled] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<SelectedUploadFile | null>(null);
+  const [selectedFile, setSelectedFile] = useState<SelectedUploadFile | null>(
+    null,
+  );
   const [cameraFile, setCameraFile] = useState<SelectedUploadFile | null>(null);
   const [currentPage, setCurrentPage] = useState(3);
 
   const [item, setItem] = useState('');
+  const [digitPasscode, setDigitPasscode] = useState('');
 
   return (
     <ScrollView
@@ -126,21 +130,21 @@ function AppContent() {
 
         <SearchBar
           value=""
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           placeholder="Disabled"
           visualState="disabled"
         />
 
         <SearchBar
           value=""
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           placeholder="Error"
           visualState="error"
         />
 
         <SearchBar
           value="Loading"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           placeholder="Loading"
           visualState="loading"
         />
@@ -153,17 +157,17 @@ function AppContent() {
           placeholder="Enter text"
         />
 
-        <Input value="Text error" onChangeText={() => { }} visualState="error" />
+        <Input value="Text error" onChangeText={() => {}} visualState="error" />
 
         <Input
           value="Text loading"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="loading"
         />
 
         <Input
           value="Text cannot be entered"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="disabled"
         />
 
@@ -176,7 +180,7 @@ function AppContent() {
 
         <Input
           value={'Text error line 1\nText error line 2\nText error line 3'}
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="error"
           multiline
         />
@@ -185,7 +189,7 @@ function AppContent() {
           value={
             'Text loading line 1\nText loading line 2\nText loading line 3'
           }
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="loading"
           multiline
         />
@@ -194,7 +198,7 @@ function AppContent() {
           value={
             'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'
           }
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           visualState="disabled"
           multiline
         />
@@ -209,7 +213,7 @@ function AppContent() {
 
         <Input
           value="123456789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="numeric"
           showNumericControls
           visualState="error"
@@ -217,7 +221,7 @@ function AppContent() {
 
         <Input
           value="123456789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="numeric"
           showNumericControls
           visualState="loading"
@@ -225,7 +229,7 @@ function AppContent() {
 
         <Input
           value="12345678"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="numeric"
           showNumericControls
           visualState="disabled"
@@ -240,21 +244,21 @@ function AppContent() {
 
         <Input
           value="user@invalid"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="email"
           visualState="error"
         />
 
         <Input
           value="user@saving.com"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="email"
           visualState="loading"
         />
 
         <Input
           value="user@saving.com"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="email"
           visualState="disabled"
         />
@@ -268,21 +272,21 @@ function AppContent() {
 
         <Input
           value="+61 423 45"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="phone"
           visualState="error"
         />
 
         <Input
           value="+61 423 456 789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="phone"
           visualState="loading"
         />
 
         <Input
           value="+61 423 456 789"
-          onChangeText={() => { }}
+          onChangeText={() => {}}
           inputType="phone"
           visualState="disabled"
         />
@@ -443,6 +447,17 @@ function AppContent() {
         </View>
       </View>
 
+      <View className="mt-6 w-full gap-3 px-5">
+        <DigitInputGroup
+          length={4}
+          value={digitPasscode}
+          onChange={setDigitPasscode}
+          onComplete={code => {
+            console.log('Completed:', code);
+          }}
+        />
+      </View>
+      
       <View className="mt-6 w-full gap-3 px-5">
         <Pagination
           currentPage={currentPage}
