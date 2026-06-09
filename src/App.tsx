@@ -22,10 +22,20 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import { UBHButton } from './components/Button';
+import { Button } from './components/Button';
 import { Camera } from 'lucide-react-native';
-import { Typography, Body1, Caption, H1 } from './components/Typography';
-import { UBHIconButton } from './components/IconButton';
+import {
+  Typography,
+  Body1,
+  Caption,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  Body2,
+} from './components/Typography';
+import { IconButton } from './components/IconButton';
 import { SearchBar } from './components/SearchBar';
 import { Input } from './components/Input';
 import { LoadingBar } from './components/LoadingBar';
@@ -74,6 +84,7 @@ function AppContent() {
 
   const [item, setItem] = useState('');
   const [digitPasscode, setDigitPasscode] = useState('');
+  const btnSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
   return (
     <ScrollView
@@ -91,35 +102,306 @@ function AppContent() {
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
       />*/}
+      <View className="py-2 items-center">
+        <H3>Welcome to</H3>
+        <H1>UBH Components</H1>
+      </View>
 
-      <H1>Hello UBH</H1>
-      <Body1 color="alert">This is normal text.</Body1>
-      <Caption color="primary">caption caption hehehe</Caption>
-      <Typography variant="body2" customColor="#7C3AED" underline italic>
-        Custom purple text
-      </Typography>
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Typography</H3>
+        <View className="gap-3">
+          <H1>Heading 1</H1>
+          <H2>Heading 2</H2>
+          <H3>Heading 3</H3>
+          <H4>Heading 4</H4>
+          <H5>Heading 5</H5>
+          <Body1>Body 1</Body1>
+          <Body2>Body 2</Body2>
+          <Caption>Caption</Caption>
+          <Caption color="alert">Caption with alternative color</Caption>
+          <Typography variant="body1" customColor="#7C3AED" underline italic>
+            Custom purple text
+          </Typography>
+        </View>
+      </View>
 
-      <UBHButton
-        title="Cancel"
-        variant="outlined"
-        onPress={() => Alert.alert('Button pressed')}
-      />
+      <View className="my-4 h-px w-full bg-gray-400" />
 
-      <UBHButton
-        title="Cancel"
-        variant="outlined"
-        size="sm"
-        iconLeft={Camera}
-        iconRight={Camera}
-        onPress={() => Alert.alert('Button pressed')}
-      />
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Buttons</H3>
+        <View>
+          <H5>Contained Buttons (default)</H5>
+          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+            <Button
+              title="Button"
+              variant="contained"
+              size="xs"
+              onPress={() => Alert.alert('xs button pressed')}
+            />
 
-      <UBHIconButton
-        size="xl"
-        variant="contained"
-        icon={Camera}
-        onPress={() => Alert.alert('Icon Button pressed')}
-      />
+            <Button
+              title="Button"
+              variant="contained"
+              size="sm"
+              onPress={() => Alert.alert('sm button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="contained"
+              size="md"
+              onPress={() => Alert.alert('md button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="contained"
+              size="lg"
+              onPress={() => Alert.alert('lg button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="contained"
+              size="xl"
+              onPress={() => Alert.alert('xl button pressed')}
+            />
+          </ScrollView>
+        </View>
+        <View>
+          <H5>Outlined Buttons</H5>
+          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+            <Button
+              title="Button"
+              variant="outlined"
+              size="xs"
+              onPress={() => Alert.alert('xs outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="sm"
+              onPress={() => Alert.alert('sm outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="md"
+              onPress={() => Alert.alert('md outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="lg"
+              onPress={() => Alert.alert('lg outlined button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="outlined"
+              size="xl"
+              onPress={() => Alert.alert('xl outlined button pressed')}
+            />
+          </ScrollView>
+        </View>
+        <View>
+          <H5>Text Buttons</H5>
+          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+            <Button
+              title="Button"
+              variant="text"
+              size="xs"
+              onPress={() => Alert.alert('xs text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="sm"
+              onPress={() => Alert.alert('sm text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="md"
+              onPress={() => Alert.alert('md text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="lg"
+              onPress={() => Alert.alert('lg text button pressed')}
+            />
+
+            <Button
+              title="Button"
+              variant="text"
+              size="xl"
+              onPress={() => Alert.alert('xl text button pressed')}
+            />
+          </ScrollView>
+        </View>
+        <View>
+          <H5>Buttons with icon</H5>
+          <View className="mt-3 gap-3 flex-row">
+            <Button
+              title="Left Icon Button"
+              variant="contained"
+              size="sm"
+              iconLeft={Camera}
+              onPress={() => Alert.alert('left icon button pressed')}
+            />
+            <Button
+              title="Right Icon Button"
+              variant="contained"
+              size="sm"
+              iconRight={Camera}
+              onPress={() => Alert.alert('right icon button pressed')}
+            />
+          </View>
+        </View>
+        <View>
+          <H5>Full-length Button</H5>
+          <View className="mt-3">
+            <Button
+              title="Full-length Button"
+              variant="contained"
+              size="sm"
+              onPress={() => Alert.alert('button pressed')}
+            />
+          </View>
+        </View>
+      </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Icon Buttons</H3>
+        <View>
+          <H5>Contained Icon Buttons</H5>
+          <View className="gap-3 items-center flex-row">
+            <IconButton
+              size="xs"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('xs icon button pressed')}
+            />
+
+            <IconButton
+              size="sm"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('sm icon button pressed')}
+            />
+
+            <IconButton
+              size="md"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('md icon button pressed')}
+            />
+
+            <IconButton
+              size="lg"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('lg icon button pressed')}
+            />
+
+            <IconButton
+              size="xl"
+              variant="contained"
+              icon={Camera}
+              onPress={() => Alert.alert('xl icon button pressed')}
+            />
+          </View>
+        </View>
+        <View>
+          <H5>Outlined Icon Buttons</H5>
+          <View className="gap-3 items-center flex-row">
+            <IconButton
+              size="xs"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('xs outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="sm"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('sm outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="md"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('md outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="lg"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('lg outlined icon button pressed')}
+            />
+
+            <IconButton
+              size="xl"
+              variant="outlined"
+              icon={Camera}
+              onPress={() => Alert.alert('xl outlined icon button pressed')}
+            />
+          </View>
+        </View>
+        <View>
+          <H5>Text Icon Buttons</H5>
+          <View className="gap-3 items-center flex-row">
+            <IconButton
+              size="xs"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('xs text icon button pressed')}
+            />
+
+            <IconButton
+              size="sm"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('sm text icon button pressed')}
+            />
+
+            <IconButton
+              size="md"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('md text icon button pressed')}
+            />
+
+            <IconButton
+              size="lg"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('lg text icon button pressed')}
+            />
+
+            <IconButton
+              size="xl"
+              variant="text"
+              icon={Camera}
+              onPress={() => Alert.alert('xl text icon button pressed')}
+            />
+          </View>
+        </View>
+      </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
 
       <View className="mt-6 w-full gap-3 px-5">
         <SearchBar
@@ -309,26 +591,53 @@ function AppContent() {
         />
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
-        <FormControl
-          label="Choose your option"
-          helperText="Select one option"
-          error={!radioOpt ? 'This field is required' : undefined}
-          disabled
-          required
-        >
-          <RadioGroup
-            value={radioOpt}
-            onChange={setRadioOpt}
-            options={[
-              { label: 'Option 1', value: 'opt1' },
-              { label: 'Option 2', value: 'opt2' },
-            ]}
-            disabled
-          />
-        </FormControl>
+      <View className="my-4 h-px w-full bg-gray-400" />
 
-        <FormControl>
+      <View className="py-5 w-full gap-5 px-5">
+        <H3 customColor="#c40904">Radio</H3>
+        <View className="gap-1">
+          <H5>Radio Group</H5>
+          <FormControl
+            label="Choose your option"
+            helperText="Select one option"
+            error={!radioOpt ? 'This field is required' : undefined}
+            required
+          >
+            <RadioGroup
+              value={radioOpt}
+              onChange={setRadioOpt}
+              options={[
+                { label: 'Option 1', value: 'opt1' },
+                { label: 'Option 2', value: 'opt2' },
+              ]}
+            />
+          </FormControl>
+        </View>
+        <View className="gap-1">
+          <H5>Disabled Radio Group</H5>
+          <FormControl
+            label="Choose your option"
+            helperText="Select one option"
+            disabled
+          >
+            <RadioGroup
+              value={radioOpt}
+              onChange={setRadioOpt}
+              options={[
+                { label: 'Option 1', value: 'opt1' },
+                { label: 'Option 2', value: 'opt2' },
+              ]}
+              disabled
+            />
+          </FormControl>
+        </View>
+      </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Checkbox</H3>
+        <FormControl label="Select your option">
           <Checkbox
             checked={checkOpts.checkbox1}
             onChange={checked =>
@@ -339,7 +648,6 @@ function AppContent() {
             }
             label="Checkbox 1"
           />
-
           <Checkbox
             checked={checkOpts.checkbox2}
             onChange={checked =>
@@ -353,7 +661,10 @@ function AppContent() {
         </FormControl>
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Dropdown</H3>
         <Dropdown
           value={dropdownItem}
           placeholder="Select an item"
@@ -367,39 +678,60 @@ function AppContent() {
         />
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
-        <Pill
-          label="Emergency"
-          color="#FF413A"
-          className=""
-          textClassName="text-[16px]"
-        />
-        <Pill
-          label="Archive"
-          color="#9E9E9E"
-          variant="outline"
-          className="w-full font-semibold"
-          textClassName="text-[12px] font-semibold"
-        />
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Pills</H3>
+        <H5>Variants</H5>
+        <View className="flex-row gap-3">
+          <Pill
+            label="Emergency"
+            color="#FF413A"
+            className=""
+            textClassName="text-[16px]"
+          />
+          <Pill
+            label="Archive"
+            color="#9E9E9E"
+            variant="outline"
+            className="font-semibold"
+            textClassName="text-[12px] font-semibold"
+          />
+        </View>
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5 flex-row">
-        <Toggle value={toggleEnabled} onChange={setToggleEnabled} />
-        <Toggle
-          value={toggleEnabled}
-          onChange={setToggleEnabled}
-          className="h-[40px] w-[72px] p-[4px]"
-          thumbClassName="h-[32px] w-[32px]"
-          disabled
-        />
-        <Toggle
-          value={toggleEnabled}
-          onChange={setToggleEnabled}
-          activeColor="#39D0A7"
-          inactiveColor="#FFDE21"
-          thumbColor="#C30010"
-        />
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Toggles</H3>
+        <View className="flex-row items-center justify-between">
+          <H5>Default</H5>
+          <Toggle value={toggleEnabled} onChange={setToggleEnabled} />
+        </View>
+        <View className="flex-row items-center justify-between">
+          <H5>Custom size</H5>
+          <Toggle
+            value={toggleEnabled}
+            onChange={setToggleEnabled}
+            className="h-[40px] w-[72px] p-[4px]"
+            thumbClassName="h-[32px] w-[32px]"
+            disabled
+          />
+        </View>
+        <View className="flex-row items-center justify-between">
+          <H5>Custom color</H5>
+          <Toggle
+            value={toggleEnabled}
+            onChange={setToggleEnabled}
+            activeColor="#39D0A7"
+            inactiveColor="#FFDE21"
+            thumbColor="#C30010"
+          />
+        </View>
       </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
+
       <View className="mt-6 w-full gap-3 px-5">
         <FileUpload
           mode="file"
@@ -448,6 +780,17 @@ function AppContent() {
       </View>
 
       <View className="mt-6 w-full gap-3 px-5">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={5}
+          onPageChange={setCurrentPage}
+        />
+      </View>
+
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Digit Password</H3>
         <DigitInputGroup
           length={4}
           value={digitPasscode}
@@ -455,14 +798,6 @@ function AppContent() {
           onComplete={code => {
             console.log('Completed:', code);
           }}
-        />
-      </View>
-      
-      <View className="mt-6 w-full gap-3 px-5">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={5}
-          onPageChange={setCurrentPage}
         />
       </View>
     </ScrollView>
