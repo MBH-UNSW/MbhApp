@@ -403,7 +403,8 @@ function AppContent() {
 
       <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="mt-6 w-full gap-3 px-5">
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Search Bar</H3>
         <SearchBar
           value={searchValue}
           onChangeText={setSearchValue}
@@ -412,169 +413,191 @@ function AppContent() {
 
         <SearchBar
           value=""
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           placeholder="Disabled"
           visualState="disabled"
         />
 
         <SearchBar
           value=""
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           placeholder="Error"
           visualState="error"
         />
 
         <SearchBar
           value="Loading"
-          onChangeText={() => {}}
+          onChangeText={() => { }}
           placeholder="Loading"
           visualState="loading"
         />
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
-        <Input
-          value={inputValue}
-          onChangeText={setInputValue}
-          placeholder="Enter text"
-        />
+      <View className="my-4 h-px w-full bg-gray-400" />
 
-        <Input value="Text error" onChangeText={() => {}} visualState="error" />
+      <View className="py-5 w-full gap-5 px-5">
+        <H3 customColor="#c40904">Input</H3>
 
-        <Input
-          value="Text loading"
-          onChangeText={() => {}}
-          visualState="loading"
-        />
+        <View className="gap-3">
+          <H5>Text Input</H5>
+          <Input
+            value={inputValue}
+            onChangeText={setInputValue}
+            placeholder="Enter text"
+          />
 
-        <Input
-          value="Text cannot be entered"
-          onChangeText={() => {}}
-          visualState="disabled"
-        />
+          <Input value="Text error" onChangeText={() => { }} visualState="error" />
 
-        <Input
-          value={multilineValue}
-          onChangeText={setMultilineValue}
-          placeholder="Enter text"
-          multiline
-        />
+          <Input
+            value="Text loading"
+            onChangeText={() => { }}
+            visualState="loading"
+          />
 
-        <Input
-          value={'Text error line 1\nText error line 2\nText error line 3'}
-          onChangeText={() => {}}
-          visualState="error"
-          multiline
-        />
+          <Input
+            value="Text cannot be entered"
+            onChangeText={() => { }}
+            visualState="disabled"
+          />
+        </View>
 
-        <Input
-          value={
-            'Text loading line 1\nText loading line 2\nText loading line 3'
-          }
-          onChangeText={() => {}}
-          visualState="loading"
-          multiline
-        />
+        <View className="gap-3">
+          <H5>Multiline Input</H5>
+          <Input
+            value={multilineValue}
+            onChangeText={setMultilineValue}
+            placeholder="Enter text"
+            multiline
+          />
 
-        <Input
-          value={
-            'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'
-          }
-          onChangeText={() => {}}
-          visualState="disabled"
-          multiline
-        />
+          <Input
+            value={'Text error line 1\nText error line 2\nText error line 3'}
+            onChangeText={() => { }}
+            visualState="error"
+            multiline
+          />
 
-        <Input
-          value={numericValue}
-          onChangeText={setNumericValue}
-          inputType="numeric"
-          placeholder="12345678"
-          showNumericControls
-        />
+          <Input
+            value={
+              'Text loading line 1\nText loading line 2\nText loading line 3'
+            }
+            onChangeText={() => { }}
+            visualState="loading"
+            multiline
+          />
 
-        <Input
-          value="123456789"
-          onChangeText={() => {}}
-          inputType="numeric"
-          showNumericControls
-          visualState="error"
-        />
+          <Input
+            value={
+              'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'
+            }
+            onChangeText={() => { }}
+            visualState="disabled"
+            multiline
+          />
+        </View>
 
-        <Input
-          value="123456789"
-          onChangeText={() => {}}
-          inputType="numeric"
-          showNumericControls
-          visualState="loading"
-        />
+        <View className="gap-3">
+          <H5>Numeric Input</H5>
+          <Input
+            value={numericValue}
+            onChangeText={setNumericValue}
+            inputType="numeric"
+            placeholder="12345678"
+            showNumericControls
+          />
 
-        <Input
-          value="12345678"
-          onChangeText={() => {}}
-          inputType="numeric"
-          showNumericControls
-          visualState="disabled"
-        />
+          <Input
+            value="123456789"
+            onChangeText={() => { }}
+            inputType="numeric"
+            showNumericControls
+            visualState="error"
+          />
 
-        <Input
-          value={emailValue}
-          onChangeText={setEmailValue}
-          placeholder="user@example.com"
-          inputType="email"
-        />
+          <Input
+            value="123456789"
+            onChangeText={() => { }}
+            inputType="numeric"
+            showNumericControls
+            visualState="loading"
+          />
 
-        <Input
-          value="user@invalid"
-          onChangeText={() => {}}
-          inputType="email"
-          visualState="error"
-        />
+          <Input
+            value="12345678"
+            onChangeText={() => { }}
+            inputType="numeric"
+            showNumericControls
+            visualState="disabled"
+          />
+        </View>
 
-        <Input
-          value="user@saving.com"
-          onChangeText={() => {}}
-          inputType="email"
-          visualState="loading"
-        />
+        <View className="gap-3">
+          <H5>Email Input</H5>
+          <Input
+            value={emailValue}
+            onChangeText={setEmailValue}
+            placeholder="user@example.com"
+            inputType="email"
+          />
 
-        <Input
-          value="user@saving.com"
-          onChangeText={() => {}}
-          inputType="email"
-          visualState="disabled"
-        />
+          <Input
+            value="user@invalid"
+            onChangeText={() => { }}
+            inputType="email"
+            visualState="error"
+          />
 
-        <Input
-          value={phoneValue}
-          onChangeText={setPhoneValue}
-          placeholder="+61 423 456 789"
-          inputType="phone"
-        />
+          <Input
+            value="user@saving.com"
+            onChangeText={() => { }}
+            inputType="email"
+            visualState="loading"
+          />
 
-        <Input
-          value="+61 423 45"
-          onChangeText={() => {}}
-          inputType="phone"
-          visualState="error"
-        />
+          <Input
+            value="user@saving.com"
+            onChangeText={() => { }}
+            inputType="email"
+            visualState="disabled"
+          />
+        </View>
 
-        <Input
-          value="+61 423 456 789"
-          onChangeText={() => {}}
-          inputType="phone"
-          visualState="loading"
-        />
+        <View className="gap-3">
+          <H5>Phone Input</H5>
+          <Input
+            value={phoneValue}
+            onChangeText={setPhoneValue}
+            placeholder="+61 423 456 789"
+            inputType="phone"
+          />
 
-        <Input
-          value="+61 423 456 789"
-          onChangeText={() => {}}
-          inputType="phone"
-          visualState="disabled"
-        />
+          <Input
+            value="+61 423 45"
+            onChangeText={() => { }}
+            inputType="phone"
+            visualState="error"
+          />
+
+          <Input
+            value="+61 423 456 789"
+            onChangeText={() => { }}
+            inputType="phone"
+            visualState="loading"
+          />
+
+          <Input
+            value="+61 423 456 789"
+            onChangeText={() => { }}
+            inputType="phone"
+            visualState="disabled"
+          />
+        </View>
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Loading Bar</H3>
         <LoadingBar progress={0} variant="neutral" />
 
         <LoadingBar progress={100} variant="success" />
@@ -732,54 +755,73 @@ function AppContent() {
 
       <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="mt-6 w-full gap-3 px-5">
-        <FileUpload
-          mode="file"
-          status={selectedFile ? 'success' : 'empty'}
-          fileName={selectedFile?.name}
-          onFileSelected={setSelectedFile}
-          onClear={() => setSelectedFile(null)}
-        />
+      <View className="py-5 w-full gap-5 px-5">
+        <H3 customColor="#c40904">File Upload</H3>
 
-        <FileUpload
-          mode="camera"
-          status={cameraFile ? 'success' : 'empty'}
-          fileName={cameraFile?.name}
-          onFileSelected={setCameraFile}
-          onClear={() => setCameraFile(null)}
-        />
+        <View className="gap-3">
+          <H5>Interactive</H5>
 
-        <FileUpload
-          status="uploading"
-          fileName={selectedFile?.name ?? 'Uploading file'}
-          progress={75}
-        />
+          <FileUpload
+            mode="file"
+            status={selectedFile ? 'success' : 'empty'}
+            fileName={selectedFile?.name}
+            onFileSelected={setSelectedFile}
+            onClear={() => setSelectedFile(null)}
+          />
 
-        <FileUpload
-          status="uploading"
-          fileName={selectedFile?.name ?? 'Uploading file'}
-          showFileIcon={false}
-          progress={75}
-        />
+          <FileUpload
+            mode="camera"
+            status={cameraFile ? 'success' : 'empty'}
+            fileName={cameraFile?.name}
+            onFileSelected={setCameraFile}
+            onClear={() => setCameraFile(null)}
+          />
+        </View>
 
-        <FileUpload
-          status="success"
-          fileName={selectedFile?.name ?? 'Selected file'}
-        />
+        <View className="gap-3">
+          <H5>States</H5>
 
-        <FileUpload status="error" />
+          <FileUpload
+            status="uploading"
+            fileName={selectedFile?.name ?? 'Uploading file'}
+            progress={75}
+          />
+
+          <FileUpload
+            status="uploading"
+            fileName={selectedFile?.name ?? 'Uploading file'}
+            showFileIcon={false}
+            progress={75}
+          />
+
+          <FileUpload
+            status="success"
+            fileName={selectedFile?.name ?? 'Selected file'}
+          />
+
+          <FileUpload status="error" />
+        </View>
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
-        <View className="flex-row items-center gap-7">
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Avatar</H3>
+        <H5>Initials</H5>
+
+        <View className="flex-row flex-wrap items-center gap-7">
           <Avatar initials="AR" size="sm" />
           <Avatar initials="AR" size="md" />
           <Avatar initials="AR" size="lg" />
           <Avatar initials="AR" size="xl" />
         </View>
+
       </View>
 
-      <View className="mt-6 w-full gap-3 px-5">
+      <View className="my-4 h-px w-full bg-gray-400" />
+
+      <View className="py-5 w-full gap-3 px-5">
+        <H3 customColor="#c40904">Pagination</H3>
         <Pagination
           currentPage={currentPage}
           totalPages={5}
