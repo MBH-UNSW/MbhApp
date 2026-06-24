@@ -1,33 +1,45 @@
 export const theme = {
-    // temp placeholders till business team confirms final colours
     colours: {
         ubhRed: {
-            0: '#fbeeee',
-            1: '#f1dada',
-            2: '#e6b0b0',
-            3: '#dd8383',
-            4: '#d55f5d',
-            5: '#d04845',
-            6: '#cf3c38',
-            7: '#b72f2b',
-            8: '#a42825',
-            9: '#941f1f',
+            0: '#f6d0d0',
+            1: '#efb2b2',
+            2: '#e68e8e',
+            3: '#da6666',
+            4: '#be2525',
+            5: '#c40904',
+            6: '#b10707',
+            7: '#a11a1a',
+            8: '#941f1f',
+            9: '#7d0907',
         },
 
         ubhBlue: {
             0: '#edf2f7',
             1: '#e6f0fa',
-            2: '#c8ddf3',
-            3: '#aacaec',
-            4: '#8eb8e5',
-            5: '#6fa4dd',
-            6: '#5292d6',
-            7: '#337ecf',
-            8: '#146ac7',
-            9: '#0056b3',
+            2: '#d6e6f5',
+            3: '#bdd7f0',
+            4: '#9fc2e3',
+            5: '#689abb',
+            6: '#4f8fcb',
+            7: '#146ac7',
+            8: '#0056b3',
+            9: '#023149',
         },
 
-        neutral: {
+        ubhCream: {
+            0: '#fffdf9',
+            1: '#fffbf5',
+            2: '#fff9ef',
+            3: '#fef8ec',
+            4: '#fef7ea',
+            5: '#fdf6e8',
+            6: '#eadfc9',
+            7: '#d2c4a6',
+            8: '#b6a77f',
+            9: '#8f805d',
+        },
+
+        ubhNeutral: {
             0: '#ffffff',
             1: '#fafafa',
             2: '#f2f2f2',
@@ -37,9 +49,11 @@ export const theme = {
             6: '#a0a0a0',
             7: '#999999',
             8: '#727272',
-            9: '#393939',
+            9: '#141414',
         },
+    },
 
+    status: {
         error: {
             text: '#cc0000',
             background: '#fef5f5',
@@ -56,21 +70,22 @@ export const theme = {
         },
     },
 
-    semantic: {
-        background: '#ffffff',
-        surface: '#ffffff',
-        surfaceMuted: '#f2f2f2',
+    primaryColor: 'ubhRed',
+    primaryShade: 5,
+    primaryShadeDark: 9,
 
-        textPrimary: '#393939',
-        textSecondary: '#727272',
-        textMuted: '#999999',
+    secondaryColor: 'ubhBlue',
+    secondaryShade: 5,
+    secondaryShadeDark: 9,
 
-        border: '#999999',
-        borderFocused: '#337ecf',
+    creamColor: 'ubhCream',
+    creamShade: 5,
 
-        primary: '#941f1f',
-        secondary: '#0056b3',
-    },
+    neutralColor: 'ubhNeutral',
+    neutralShadeLight: 0,
+    neutralShadeDark: 9,
+
+    defaultRadius: 'sm',
 
     spacing: {
         xxxs: 2,
@@ -78,7 +93,7 @@ export const theme = {
         xs: 8,
         sm: 12,
         md: 16,
-        lg: 24,
+        lg: 28,
         xl: 32,
     },
 
