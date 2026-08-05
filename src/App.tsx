@@ -49,6 +49,7 @@ import { FileUpload, type SelectedUploadFile } from './components/FileUpload';
 import { Avatar } from './components/Avatar';
 import { DigitInputGroup } from './components/DigitInput';
 import { Pagination } from './components/Pagination';
+import { Navbar, type NavbarTab } from './components/Navbar';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -85,764 +86,771 @@ function AppContent() {
   const [item, setItem] = useState('');
   const [digitPasscode, setDigitPasscode] = useState('');
   const btnSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const [selectedTab, setSelectedTab] = useState<NavbarTab>('records');
 
   return (
-    <ScrollView
-      className="flex-1 bg-white"
-      contentContainerStyle={{
-        flexGrow: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingHorizontal: 20,
-        paddingTop: 90,
-        paddingBottom: 30,
-      }}
-    >
-      {/*<NewAppScreen
+    <View className="flex-1">
+      <ScrollView
+        className="flex-1 bg-white"
+        contentContainerStyle={{
+          flexGrow: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingHorizontal: 20,
+          paddingTop: 90,
+          paddingBottom: 30,
+        }}
+      >
+        {/*<NewAppScreen
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
       />*/}
-      <View className="py-2 items-center">
-        <H3>Welcome to</H3>
-        <H1>UBH Components</H1>
-      </View>
-
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Typography</H3>
-        <View className="gap-3">
-          <H1>Heading 1</H1>
-          <H2>Heading 2</H2>
-          <H3>Heading 3</H3>
-          <H4>Heading 4</H4>
-          <H5>Heading 5</H5>
-          <Body1>Body 1</Body1>
-          <Body2>Body 2</Body2>
-          <Caption>Caption</Caption>
-          <Caption color="alert">Caption with alternative color</Caption>
-          <Typography variant="body1" customColor="#7C3AED" underline italic>
-            Custom purple text
-          </Typography>
+        <View className="py-2 items-center">
+          <H3>Welcome to</H3>
+          <H1>UBH Components</H1>
         </View>
-      </View>
 
-      <View className="my-4 h-px w-full bg-gray-400" />
-
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Buttons</H3>
-        <View>
-          <H5>Contained Buttons (default)</H5>
-          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
-            <Button
-              title="Button"
-              variant="contained"
-              size="xs"
-              onPress={() => Alert.alert('xs button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="contained"
-              size="sm"
-              onPress={() => Alert.alert('sm button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="contained"
-              size="md"
-              onPress={() => Alert.alert('md button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="contained"
-              size="lg"
-              onPress={() => Alert.alert('lg button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="contained"
-              size="xl"
-              onPress={() => Alert.alert('xl button pressed')}
-            />
-          </ScrollView>
-        </View>
-        <View>
-          <H5>Outlined Buttons</H5>
-          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
-            <Button
-              title="Button"
-              variant="outlined"
-              size="xs"
-              onPress={() => Alert.alert('xs outlined button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="outlined"
-              size="sm"
-              onPress={() => Alert.alert('sm outlined button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="outlined"
-              size="md"
-              onPress={() => Alert.alert('md outlined button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="outlined"
-              size="lg"
-              onPress={() => Alert.alert('lg outlined button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="outlined"
-              size="xl"
-              onPress={() => Alert.alert('xl outlined button pressed')}
-            />
-          </ScrollView>
-        </View>
-        <View>
-          <H5>Text Buttons</H5>
-          <ScrollView horizontal contentContainerClassName="gap-3 items-center">
-            <Button
-              title="Button"
-              variant="text"
-              size="xs"
-              onPress={() => Alert.alert('xs text button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="text"
-              size="sm"
-              onPress={() => Alert.alert('sm text button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="text"
-              size="md"
-              onPress={() => Alert.alert('md text button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="text"
-              size="lg"
-              onPress={() => Alert.alert('lg text button pressed')}
-            />
-
-            <Button
-              title="Button"
-              variant="text"
-              size="xl"
-              onPress={() => Alert.alert('xl text button pressed')}
-            />
-          </ScrollView>
-        </View>
-        <View>
-          <H5>Buttons with icon</H5>
-          <View className="mt-3 gap-3 flex-row">
-            <Button
-              title="Left Icon Button"
-              variant="contained"
-              size="sm"
-              iconLeft={Camera}
-              onPress={() => Alert.alert('left icon button pressed')}
-            />
-            <Button
-              title="Right Icon Button"
-              variant="contained"
-              size="sm"
-              iconRight={Camera}
-              onPress={() => Alert.alert('right icon button pressed')}
-            />
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Typography</H3>
+          <View className="gap-3">
+            <H1>Heading 1</H1>
+            <H2>Heading 2</H2>
+            <H3>Heading 3</H3>
+            <H4>Heading 4</H4>
+            <H5>Heading 5</H5>
+            <Body1>Body 1</Body1>
+            <Body2>Body 2</Body2>
+            <Caption>Caption</Caption>
+            <Caption color="alert">Caption with alternative color</Caption>
+            <Typography variant="body1" customColor="#7C3AED" underline italic>
+              Custom purple text
+            </Typography>
           </View>
         </View>
-        <View>
-          <H5>Full-length Button</H5>
-          <View className="mt-3">
-            <Button
-              title="Full-length Button"
-              variant="contained"
-              size="sm"
-              onPress={() => Alert.alert('button pressed')}
-            />
+
+        <View className="my-4 h-px w-full bg-gray-400" />
+
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Buttons</H3>
+          <View>
+            <H5>Contained Buttons (default)</H5>
+            <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+              <Button
+                title="Button"
+                variant="contained"
+                size="xs"
+                onPress={() => Alert.alert('xs button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="contained"
+                size="sm"
+                onPress={() => Alert.alert('sm button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="contained"
+                size="md"
+                onPress={() => Alert.alert('md button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="contained"
+                size="lg"
+                onPress={() => Alert.alert('lg button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="contained"
+                size="xl"
+                onPress={() => Alert.alert('xl button pressed')}
+              />
+            </ScrollView>
+          </View>
+          <View>
+            <H5>Outlined Buttons</H5>
+            <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+              <Button
+                title="Button"
+                variant="outlined"
+                size="xs"
+                onPress={() => Alert.alert('xs outlined button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="outlined"
+                size="sm"
+                onPress={() => Alert.alert('sm outlined button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="outlined"
+                size="md"
+                onPress={() => Alert.alert('md outlined button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="outlined"
+                size="lg"
+                onPress={() => Alert.alert('lg outlined button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="outlined"
+                size="xl"
+                onPress={() => Alert.alert('xl outlined button pressed')}
+              />
+            </ScrollView>
+          </View>
+          <View>
+            <H5>Text Buttons</H5>
+            <ScrollView horizontal contentContainerClassName="gap-3 items-center">
+              <Button
+                title="Button"
+                variant="text"
+                size="xs"
+                onPress={() => Alert.alert('xs text button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="text"
+                size="sm"
+                onPress={() => Alert.alert('sm text button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="text"
+                size="md"
+                onPress={() => Alert.alert('md text button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="text"
+                size="lg"
+                onPress={() => Alert.alert('lg text button pressed')}
+              />
+
+              <Button
+                title="Button"
+                variant="text"
+                size="xl"
+                onPress={() => Alert.alert('xl text button pressed')}
+              />
+            </ScrollView>
+          </View>
+          <View>
+            <H5>Buttons with icon</H5>
+            <View className="mt-3 gap-3 flex-row">
+              <Button
+                title="Left Icon Button"
+                variant="contained"
+                size="sm"
+                iconLeft={Camera}
+                onPress={() => Alert.alert('left icon button pressed')}
+              />
+              <Button
+                title="Right Icon Button"
+                variant="contained"
+                size="sm"
+                iconRight={Camera}
+                onPress={() => Alert.alert('right icon button pressed')}
+              />
+            </View>
+          </View>
+          <View>
+            <H5>Full-length Button</H5>
+            <View className="mt-3">
+              <Button
+                title="Full-length Button"
+                variant="contained"
+                size="sm"
+                onPress={() => Alert.alert('button pressed')}
+              />
+            </View>
           </View>
         </View>
-      </View>
 
-      <View className="my-4 h-px w-full bg-gray-400" />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Icon Buttons</H3>
-        <View>
-          <H5>Contained Icon Buttons</H5>
-          <View className="gap-3 items-center flex-row">
-            <IconButton
-              size="xs"
-              variant="contained"
-              icon={Camera}
-              onPress={() => Alert.alert('xs icon button pressed')}
-            />
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Icon Buttons</H3>
+          <View>
+            <H5>Contained Icon Buttons</H5>
+            <View className="gap-3 items-center flex-row">
+              <IconButton
+                size="xs"
+                variant="contained"
+                icon={Camera}
+                onPress={() => Alert.alert('xs icon button pressed')}
+              />
 
-            <IconButton
-              size="sm"
-              variant="contained"
-              icon={Camera}
-              onPress={() => Alert.alert('sm icon button pressed')}
-            />
+              <IconButton
+                size="sm"
+                variant="contained"
+                icon={Camera}
+                onPress={() => Alert.alert('sm icon button pressed')}
+              />
 
-            <IconButton
-              size="md"
-              variant="contained"
-              icon={Camera}
-              onPress={() => Alert.alert('md icon button pressed')}
-            />
+              <IconButton
+                size="md"
+                variant="contained"
+                icon={Camera}
+                onPress={() => Alert.alert('md icon button pressed')}
+              />
 
-            <IconButton
-              size="lg"
-              variant="contained"
-              icon={Camera}
-              onPress={() => Alert.alert('lg icon button pressed')}
-            />
+              <IconButton
+                size="lg"
+                variant="contained"
+                icon={Camera}
+                onPress={() => Alert.alert('lg icon button pressed')}
+              />
 
-            <IconButton
-              size="xl"
-              variant="contained"
-              icon={Camera}
-              onPress={() => Alert.alert('xl icon button pressed')}
-            />
+              <IconButton
+                size="xl"
+                variant="contained"
+                icon={Camera}
+                onPress={() => Alert.alert('xl icon button pressed')}
+              />
+            </View>
+          </View>
+          <View>
+            <H5>Outlined Icon Buttons</H5>
+            <View className="gap-3 items-center flex-row">
+              <IconButton
+                size="xs"
+                variant="outlined"
+                icon={Camera}
+                onPress={() => Alert.alert('xs outlined icon button pressed')}
+              />
+
+              <IconButton
+                size="sm"
+                variant="outlined"
+                icon={Camera}
+                onPress={() => Alert.alert('sm outlined icon button pressed')}
+              />
+
+              <IconButton
+                size="md"
+                variant="outlined"
+                icon={Camera}
+                onPress={() => Alert.alert('md outlined icon button pressed')}
+              />
+
+              <IconButton
+                size="lg"
+                variant="outlined"
+                icon={Camera}
+                onPress={() => Alert.alert('lg outlined icon button pressed')}
+              />
+
+              <IconButton
+                size="xl"
+                variant="outlined"
+                icon={Camera}
+                onPress={() => Alert.alert('xl outlined icon button pressed')}
+              />
+            </View>
+          </View>
+          <View>
+            <H5>Text Icon Buttons</H5>
+            <View className="gap-3 items-center flex-row">
+              <IconButton
+                size="xs"
+                variant="text"
+                icon={Camera}
+                onPress={() => Alert.alert('xs text icon button pressed')}
+              />
+
+              <IconButton
+                size="sm"
+                variant="text"
+                icon={Camera}
+                onPress={() => Alert.alert('sm text icon button pressed')}
+              />
+
+              <IconButton
+                size="md"
+                variant="text"
+                icon={Camera}
+                onPress={() => Alert.alert('md text icon button pressed')}
+              />
+
+              <IconButton
+                size="lg"
+                variant="text"
+                icon={Camera}
+                onPress={() => Alert.alert('lg text icon button pressed')}
+              />
+
+              <IconButton
+                size="xl"
+                variant="text"
+                icon={Camera}
+                onPress={() => Alert.alert('xl text icon button pressed')}
+              />
+            </View>
           </View>
         </View>
-        <View>
-          <H5>Outlined Icon Buttons</H5>
-          <View className="gap-3 items-center flex-row">
-            <IconButton
-              size="xs"
-              variant="outlined"
-              icon={Camera}
-              onPress={() => Alert.alert('xs outlined icon button pressed')}
-            />
 
-            <IconButton
-              size="sm"
-              variant="outlined"
-              icon={Camera}
-              onPress={() => Alert.alert('sm outlined icon button pressed')}
-            />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-            <IconButton
-              size="md"
-              variant="outlined"
-              icon={Camera}
-              onPress={() => Alert.alert('md outlined icon button pressed')}
-            />
-
-            <IconButton
-              size="lg"
-              variant="outlined"
-              icon={Camera}
-              onPress={() => Alert.alert('lg outlined icon button pressed')}
-            />
-
-            <IconButton
-              size="xl"
-              variant="outlined"
-              icon={Camera}
-              onPress={() => Alert.alert('xl outlined icon button pressed')}
-            />
-          </View>
-        </View>
-        <View>
-          <H5>Text Icon Buttons</H5>
-          <View className="gap-3 items-center flex-row">
-            <IconButton
-              size="xs"
-              variant="text"
-              icon={Camera}
-              onPress={() => Alert.alert('xs text icon button pressed')}
-            />
-
-            <IconButton
-              size="sm"
-              variant="text"
-              icon={Camera}
-              onPress={() => Alert.alert('sm text icon button pressed')}
-            />
-
-            <IconButton
-              size="md"
-              variant="text"
-              icon={Camera}
-              onPress={() => Alert.alert('md text icon button pressed')}
-            />
-
-            <IconButton
-              size="lg"
-              variant="text"
-              icon={Camera}
-              onPress={() => Alert.alert('lg text icon button pressed')}
-            />
-
-            <IconButton
-              size="xl"
-              variant="text"
-              icon={Camera}
-              onPress={() => Alert.alert('xl text icon button pressed')}
-            />
-          </View>
-        </View>
-      </View>
-
-      <View className="my-4 h-px w-full bg-gray-400" />
-
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Search Bar</H3>
-        <SearchBar
-          value={searchValue}
-          onChangeText={setSearchValue}
-          placeholder="Search"
-        />
-
-        <SearchBar
-          value=""
-          onChangeText={() => { }}
-          placeholder="Disabled"
-          visualState="disabled"
-        />
-
-        <SearchBar
-          value=""
-          onChangeText={() => { }}
-          placeholder="Error"
-          visualState="error"
-        />
-
-        <SearchBar
-          value="Loading"
-          onChangeText={() => { }}
-          placeholder="Loading"
-          visualState="loading"
-        />
-      </View>
-
-      <View className="my-4 h-px w-full bg-gray-400" />
-
-      <View className="py-5 w-full gap-5 px-5">
-        <H3 customColor="#c40904">Input</H3>
-
-        <View className="gap-3">
-          <H5>Text Input</H5>
-          <Input
-            value={inputValue}
-            onChangeText={setInputValue}
-            placeholder="Enter text"
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Search Bar</H3>
+          <SearchBar
+            value={searchValue}
+            onChangeText={setSearchValue}
+            placeholder="Search"
           />
 
-          <Input value="Text error" onChangeText={() => { }} visualState="error" />
-
-          <Input
-            value="Text loading"
+          <SearchBar
+            value=""
             onChangeText={() => { }}
-            visualState="loading"
-          />
-
-          <Input
-            value="Text cannot be entered"
-            onChangeText={() => { }}
+            placeholder="Disabled"
             visualState="disabled"
           />
-        </View>
 
-        <View className="gap-3">
-          <H5>Multiline Input</H5>
-          <Input
-            value={multilineValue}
-            onChangeText={setMultilineValue}
-            placeholder="Enter text"
-            multiline
-          />
-
-          <Input
-            value={'Text error line 1\nText error line 2\nText error line 3'}
+          <SearchBar
+            value=""
             onChangeText={() => { }}
-            visualState="error"
-            multiline
-          />
-
-          <Input
-            value={
-              'Text loading line 1\nText loading line 2\nText loading line 3'
-            }
-            onChangeText={() => { }}
-            visualState="loading"
-            multiline
-          />
-
-          <Input
-            value={
-              'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'
-            }
-            onChangeText={() => { }}
-            visualState="disabled"
-            multiline
-          />
-        </View>
-
-        <View className="gap-3">
-          <H5>Numeric Input</H5>
-          <Input
-            value={numericValue}
-            onChangeText={setNumericValue}
-            inputType="numeric"
-            placeholder="12345678"
-            showNumericControls
-          />
-
-          <Input
-            value="123456789"
-            onChangeText={() => { }}
-            inputType="numeric"
-            showNumericControls
+            placeholder="Error"
             visualState="error"
           />
 
-          <Input
-            value="123456789"
+          <SearchBar
+            value="Loading"
             onChangeText={() => { }}
-            inputType="numeric"
-            showNumericControls
+            placeholder="Loading"
             visualState="loading"
-          />
-
-          <Input
-            value="12345678"
-            onChangeText={() => { }}
-            inputType="numeric"
-            showNumericControls
-            visualState="disabled"
           />
         </View>
 
-        <View className="gap-3">
-          <H5>Email Input</H5>
-          <Input
-            value={emailValue}
-            onChangeText={setEmailValue}
-            placeholder="user@example.com"
-            inputType="email"
-          />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-          <Input
-            value="user@invalid"
-            onChangeText={() => { }}
-            inputType="email"
-            visualState="error"
-          />
+        <View className="py-5 w-full gap-5 px-5">
+          <H3 customColor="#c40904">Input</H3>
 
-          <Input
-            value="user@saving.com"
-            onChangeText={() => { }}
-            inputType="email"
-            visualState="loading"
-          />
+          <View className="gap-3">
+            <H5>Text Input</H5>
+            <Input
+              value={inputValue}
+              onChangeText={setInputValue}
+              placeholder="Enter text"
+            />
 
-          <Input
-            value="user@saving.com"
-            onChangeText={() => { }}
-            inputType="email"
-            visualState="disabled"
+            <Input value="Text error" onChangeText={() => { }} visualState="error" />
+
+            <Input
+              value="Text loading"
+              onChangeText={() => { }}
+              visualState="loading"
+            />
+
+            <Input
+              value="Text cannot be entered"
+              onChangeText={() => { }}
+              visualState="disabled"
+            />
+          </View>
+
+          <View className="gap-3">
+            <H5>Multiline Input</H5>
+            <Input
+              value={multilineValue}
+              onChangeText={setMultilineValue}
+              placeholder="Enter text"
+              multiline
+            />
+
+            <Input
+              value={'Text error line 1\nText error line 2\nText error line 3'}
+              onChangeText={() => { }}
+              visualState="error"
+              multiline
+            />
+
+            <Input
+              value={
+                'Text loading line 1\nText loading line 2\nText loading line 3'
+              }
+              onChangeText={() => { }}
+              visualState="loading"
+              multiline
+            />
+
+            <Input
+              value={
+                'Text cannot be entered 1\nText cannot be entered 2\nText cannot be entered 3'
+              }
+              onChangeText={() => { }}
+              visualState="disabled"
+              multiline
+            />
+          </View>
+
+          <View className="gap-3">
+            <H5>Numeric Input</H5>
+            <Input
+              value={numericValue}
+              onChangeText={setNumericValue}
+              inputType="numeric"
+              placeholder="12345678"
+              showNumericControls
+            />
+
+            <Input
+              value="123456789"
+              onChangeText={() => { }}
+              inputType="numeric"
+              showNumericControls
+              visualState="error"
+            />
+
+            <Input
+              value="123456789"
+              onChangeText={() => { }}
+              inputType="numeric"
+              showNumericControls
+              visualState="loading"
+            />
+
+            <Input
+              value="12345678"
+              onChangeText={() => { }}
+              inputType="numeric"
+              showNumericControls
+              visualState="disabled"
+            />
+          </View>
+
+          <View className="gap-3">
+            <H5>Email Input</H5>
+            <Input
+              value={emailValue}
+              onChangeText={setEmailValue}
+              placeholder="user@example.com"
+              inputType="email"
+            />
+
+            <Input
+              value="user@invalid"
+              onChangeText={() => { }}
+              inputType="email"
+              visualState="error"
+            />
+
+            <Input
+              value="user@saving.com"
+              onChangeText={() => { }}
+              inputType="email"
+              visualState="loading"
+            />
+
+            <Input
+              value="user@saving.com"
+              onChangeText={() => { }}
+              inputType="email"
+              visualState="disabled"
+            />
+          </View>
+
+          <View className="gap-3">
+            <H5>Phone Input</H5>
+            <Input
+              value={phoneValue}
+              onChangeText={setPhoneValue}
+              placeholder="+61 423 456 789"
+              inputType="phone"
+            />
+
+            <Input
+              value="+61 423 45"
+              onChangeText={() => { }}
+              inputType="phone"
+              visualState="error"
+            />
+
+            <Input
+              value="+61 423 456 789"
+              onChangeText={() => { }}
+              inputType="phone"
+              visualState="loading"
+            />
+
+            <Input
+              value="+61 423 456 789"
+              onChangeText={() => { }}
+              inputType="phone"
+              visualState="disabled"
+            />
+          </View>
+        </View>
+
+        <View className="my-4 h-px w-full bg-gray-400" />
+
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Loading Bar</H3>
+          <LoadingBar progress={0} variant="neutral" />
+
+          <LoadingBar progress={100} variant="success" />
+
+          <LoadingBar progress={50} variant="warning" />
+
+          <LoadingBar progress={50} variant="error" />
+
+          <LoadingBar
+            progress={75}
+            variant="success"
+            showPercentage
+            helperText="Nearly done"
           />
         </View>
 
-        <View className="gap-3">
-          <H5>Phone Input</H5>
-          <Input
-            value={phoneValue}
-            onChangeText={setPhoneValue}
-            placeholder="+61 423 456 789"
-            inputType="phone"
-          />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-          <Input
-            value="+61 423 45"
-            onChangeText={() => { }}
-            inputType="phone"
-            visualState="error"
-          />
-
-          <Input
-            value="+61 423 456 789"
-            onChangeText={() => { }}
-            inputType="phone"
-            visualState="loading"
-          />
-
-          <Input
-            value="+61 423 456 789"
-            onChangeText={() => { }}
-            inputType="phone"
-            visualState="disabled"
-          />
+        <View className="py-5 w-full gap-5 px-5">
+          <H3 customColor="#c40904">Radio</H3>
+          <View className="gap-1">
+            <H5>Radio Group</H5>
+            <FormControl
+              label="Choose your option"
+              helperText="Select one option"
+              error={!radioOpt ? 'This field is required' : undefined}
+              required
+            >
+              <RadioGroup
+                value={radioOpt}
+                onChange={setRadioOpt}
+                options={[
+                  { label: 'Option 1', value: 'opt1' },
+                  { label: 'Option 2', value: 'opt2' },
+                ]}
+              />
+            </FormControl>
+          </View>
+          <View className="gap-1">
+            <H5>Disabled Radio Group</H5>
+            <FormControl
+              label="Choose your option"
+              helperText="Select one option"
+              disabled
+            >
+              <RadioGroup
+                value={radioOpt}
+                onChange={setRadioOpt}
+                options={[
+                  { label: 'Option 1', value: 'opt1' },
+                  { label: 'Option 2', value: 'opt2' },
+                ]}
+                disabled
+              />
+            </FormControl>
+          </View>
         </View>
-      </View>
 
-      <View className="my-4 h-px w-full bg-gray-400" />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Loading Bar</H3>
-        <LoadingBar progress={0} variant="neutral" />
-
-        <LoadingBar progress={100} variant="success" />
-
-        <LoadingBar progress={50} variant="warning" />
-
-        <LoadingBar progress={50} variant="error" />
-
-        <LoadingBar
-          progress={75}
-          variant="success"
-          showPercentage
-          helperText="Nearly done"
-        />
-      </View>
-
-      <View className="my-4 h-px w-full bg-gray-400" />
-
-      <View className="py-5 w-full gap-5 px-5">
-        <H3 customColor="#c40904">Radio</H3>
-        <View className="gap-1">
-          <H5>Radio Group</H5>
-          <FormControl
-            label="Choose your option"
-            helperText="Select one option"
-            error={!radioOpt ? 'This field is required' : undefined}
-            required
-          >
-            <RadioGroup
-              value={radioOpt}
-              onChange={setRadioOpt}
-              options={[
-                { label: 'Option 1', value: 'opt1' },
-                { label: 'Option 2', value: 'opt2' },
-              ]}
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Checkbox</H3>
+          <FormControl label="Select your option">
+            <Checkbox
+              checked={checkOpts.checkbox1}
+              onChange={checked =>
+                setCheckOpts(prev => ({
+                  ...prev,
+                  checkbox1: checked,
+                }))
+              }
+              label="Checkbox 1"
+            />
+            <Checkbox
+              checked={checkOpts.checkbox2}
+              onChange={checked =>
+                setCheckOpts(prev => ({
+                  ...prev,
+                  checkbox2: checked,
+                }))
+              }
+              label="Checkbox 2"
             />
           </FormControl>
         </View>
-        <View className="gap-1">
-          <H5>Disabled Radio Group</H5>
-          <FormControl
-            label="Choose your option"
-            helperText="Select one option"
-            disabled
-          >
-            <RadioGroup
-              value={radioOpt}
-              onChange={setRadioOpt}
-              options={[
-                { label: 'Option 1', value: 'opt1' },
-                { label: 'Option 2', value: 'opt2' },
-              ]}
+
+        <View className="my-4 h-px w-full bg-gray-400" />
+
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Dropdown</H3>
+          <Dropdown
+            value={dropdownItem}
+            placeholder="Select an item"
+            options={[
+              { label: 'Item 1', value: 'item-1' },
+              { label: 'Item 2', value: 'item-2' },
+              { label: 'Item 3', value: 'item-3' },
+              { label: 'Item 4', value: 'item-4' },
+            ]}
+            onChange={value => setDropdownItem(value)}
+          />
+        </View>
+
+        <View className="my-4 h-px w-full bg-gray-400" />
+
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Pills</H3>
+          <H5>Variants</H5>
+          <View className="flex-row gap-3">
+            <Pill
+              label="Emergency"
+              color="#FF413A"
+              className=""
+              textClassName="text-[16px]"
+            />
+            <Pill
+              label="Archive"
+              color="#9E9E9E"
+              variant="outline"
+              className="font-semibold"
+              textClassName="text-[12px] font-semibold"
+            />
+          </View>
+        </View>
+
+        <View className="my-4 h-px w-full bg-gray-400" />
+
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Toggles</H3>
+          <View className="flex-row items-center justify-between">
+            <H5>Default</H5>
+            <Toggle value={toggleEnabled} onChange={setToggleEnabled} />
+          </View>
+          <View className="flex-row items-center justify-between">
+            <H5>Custom size</H5>
+            <Toggle
+              value={toggleEnabled}
+              onChange={setToggleEnabled}
+              className="h-[40px] w-[72px] p-[4px]"
+              thumbClassName="h-[32px] w-[32px]"
               disabled
             />
-          </FormControl>
+          </View>
+          <View className="flex-row items-center justify-between">
+            <H5>Custom color</H5>
+            <Toggle
+              value={toggleEnabled}
+              onChange={setToggleEnabled}
+              activeColor="#39D0A7"
+              inactiveColor="#FFDE21"
+              thumbColor="#C30010"
+            />
+          </View>
         </View>
-      </View>
 
-      <View className="my-4 h-px w-full bg-gray-400" />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Checkbox</H3>
-        <FormControl label="Select your option">
-          <Checkbox
-            checked={checkOpts.checkbox1}
-            onChange={checked =>
-              setCheckOpts(prev => ({
-                ...prev,
-                checkbox1: checked,
-              }))
-            }
-            label="Checkbox 1"
-          />
-          <Checkbox
-            checked={checkOpts.checkbox2}
-            onChange={checked =>
-              setCheckOpts(prev => ({
-                ...prev,
-                checkbox2: checked,
-              }))
-            }
-            label="Checkbox 2"
-          />
-        </FormControl>
-      </View>
+        <View className="py-5 w-full gap-5 px-5">
+          <H3 customColor="#c40904">File Upload</H3>
 
-      <View className="my-4 h-px w-full bg-gray-400" />
+          <View className="gap-3">
+            <H5>Interactive</H5>
 
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Dropdown</H3>
-        <Dropdown
-          value={dropdownItem}
-          placeholder="Select an item"
-          options={[
-            { label: 'Item 1', value: 'item-1' },
-            { label: 'Item 2', value: 'item-2' },
-            { label: 'Item 3', value: 'item-3' },
-            { label: 'Item 4', value: 'item-4' },
-          ]}
-          onChange={value => setDropdownItem(value)}
-        />
-      </View>
+            <FileUpload
+              mode="file"
+              status={selectedFile ? 'success' : 'empty'}
+              fileName={selectedFile?.name}
+              onFileSelected={setSelectedFile}
+              onClear={() => setSelectedFile(null)}
+            />
 
-      <View className="my-4 h-px w-full bg-gray-400" />
+            <FileUpload
+              mode="camera"
+              status={cameraFile ? 'success' : 'empty'}
+              fileName={cameraFile?.name}
+              onFileSelected={setCameraFile}
+              onClear={() => setCameraFile(null)}
+            />
+          </View>
 
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Pills</H3>
-        <H5>Variants</H5>
-        <View className="flex-row gap-3">
-          <Pill
-            label="Emergency"
-            color="#FF413A"
-            className=""
-            textClassName="text-[16px]"
-          />
-          <Pill
-            label="Archive"
-            color="#9E9E9E"
-            variant="outline"
-            className="font-semibold"
-            textClassName="text-[12px] font-semibold"
-          />
+          <View className="gap-3">
+            <H5>States</H5>
+
+            <FileUpload
+              status="uploading"
+              fileName={selectedFile?.name ?? 'Uploading file'}
+              progress={75}
+            />
+
+            <FileUpload
+              status="uploading"
+              fileName={selectedFile?.name ?? 'Uploading file'}
+              showFileIcon={false}
+              progress={75}
+            />
+
+            <FileUpload
+              status="success"
+              fileName={selectedFile?.name ?? 'Selected file'}
+            />
+
+            <FileUpload status="error" />
+          </View>
         </View>
-      </View>
 
-      <View className="my-4 h-px w-full bg-gray-400" />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Toggles</H3>
-        <View className="flex-row items-center justify-between">
-          <H5>Default</H5>
-          <Toggle value={toggleEnabled} onChange={setToggleEnabled} />
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Avatar</H3>
+          <H5>Initials</H5>
+
+          <View className="flex-row flex-wrap items-center gap-7">
+            <Avatar initials="AR" size="sm" />
+            <Avatar initials="AR" size="md" />
+            <Avatar initials="AR" size="lg" />
+            <Avatar initials="AR" size="xl" />
+          </View>
+
         </View>
-        <View className="flex-row items-center justify-between">
-          <H5>Custom size</H5>
-          <Toggle
-            value={toggleEnabled}
-            onChange={setToggleEnabled}
-            className="h-[40px] w-[72px] p-[4px]"
-            thumbClassName="h-[32px] w-[32px]"
-            disabled
-          />
-        </View>
-        <View className="flex-row items-center justify-between">
-          <H5>Custom color</H5>
-          <Toggle
-            value={toggleEnabled}
-            onChange={setToggleEnabled}
-            activeColor="#39D0A7"
-            inactiveColor="#FFDE21"
-            thumbColor="#C30010"
-          />
-        </View>
-      </View>
 
-      <View className="my-4 h-px w-full bg-gray-400" />
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-      <View className="py-5 w-full gap-5 px-5">
-        <H3 customColor="#c40904">File Upload</H3>
-
-        <View className="gap-3">
-          <H5>Interactive</H5>
-
-          <FileUpload
-            mode="file"
-            status={selectedFile ? 'success' : 'empty'}
-            fileName={selectedFile?.name}
-            onFileSelected={setSelectedFile}
-            onClear={() => setSelectedFile(null)}
-          />
-
-          <FileUpload
-            mode="camera"
-            status={cameraFile ? 'success' : 'empty'}
-            fileName={cameraFile?.name}
-            onFileSelected={setCameraFile}
-            onClear={() => setCameraFile(null)}
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Pagination</H3>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={5}
+            onPageChange={setCurrentPage}
           />
         </View>
 
-        <View className="gap-3">
-          <H5>States</H5>
+        <View className="my-4 h-px w-full bg-gray-400" />
 
-          <FileUpload
-            status="uploading"
-            fileName={selectedFile?.name ?? 'Uploading file'}
-            progress={75}
+        <View className="py-5 w-full gap-3 px-5">
+          <H3 customColor="#c40904">Digit Password</H3>
+          <DigitInputGroup
+            length={4}
+            value={digitPasscode}
+            onChange={setDigitPasscode}
+            onComplete={code => {
+              console.log('Completed:', code);
+            }}
           />
-
-          <FileUpload
-            status="uploading"
-            fileName={selectedFile?.name ?? 'Uploading file'}
-            showFileIcon={false}
-            progress={75}
-          />
-
-          <FileUpload
-            status="success"
-            fileName={selectedFile?.name ?? 'Selected file'}
-          />
-
-          <FileUpload status="error" />
         </View>
-      </View>
-
-      <View className="my-4 h-px w-full bg-gray-400" />
-
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Avatar</H3>
-        <H5>Initials</H5>
-
-        <View className="flex-row flex-wrap items-center gap-7">
-          <Avatar initials="AR" size="sm" />
-          <Avatar initials="AR" size="md" />
-          <Avatar initials="AR" size="lg" />
-          <Avatar initials="AR" size="xl" />
-        </View>
-
-      </View>
-
-      <View className="my-4 h-px w-full bg-gray-400" />
-
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Pagination</H3>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={5}
-          onPageChange={setCurrentPage}
-        />
-      </View>
-
-      <View className="my-4 h-px w-full bg-gray-400" />
-
-      <View className="py-5 w-full gap-3 px-5">
-        <H3 customColor="#c40904">Digit Password</H3>
-        <DigitInputGroup
-          length={4}
-          value={digitPasscode}
-          onChange={setDigitPasscode}
-          onComplete={code => {
-            console.log('Completed:', code);
-          }}
-        />
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Navbar
+        selectedTab={selectedTab}
+        onTabPress={setSelectedTab}
+      />
+    </View>
   );
 }
 

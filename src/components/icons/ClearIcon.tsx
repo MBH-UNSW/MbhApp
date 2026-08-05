@@ -1,6 +1,7 @@
 import { X } from 'lucide-react-native';
 import React from 'react';
 import { Pressable, View } from 'react-native';
+import { theme } from '../../theme/theme';
 
 export type ClearIconVariant = 'subtle' | 'neutral' | 'primary';
 
@@ -45,13 +46,13 @@ export function ClearIcon({ variant = 'subtle', onPress }: ClearIconProps) {
 }
 
 const clearIconClasses: Record<ClearIconVariant, string> = {
-    subtle: 'bg-neutral-400',
-    neutral: 'bg-neutral-400',
-    primary: 'bg-blue-600',
+    subtle: theme.colours.ubhNeutral[5],
+    neutral: theme.colours.ubhNeutral[5],
+    primary: theme.colours.ubhBlue[5],
 };
 
 const clearIconColors: Record<ClearIconVariant, string> = {
-    subtle: '#ffffff',
-    neutral: '#000000',
-    primary: '#ffffff',
+    subtle: theme.colours.ubhNeutral[0],
+    neutral: theme.colours.ubhNeutral[9],
+    primary: theme.colours.ubhNeutral[0],
 };
