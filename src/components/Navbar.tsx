@@ -37,6 +37,7 @@ type NavbarItem = {
 
 const ICON_SIZE = 45;
 const NAVBAR_HEIGHT = 50;
+const ICON_VERTICAL_OFFSET = 10;
 
 const navbarItems: NavbarItem[] = [
     {
@@ -83,44 +84,56 @@ export function Navbar({
 
     return (
         <View
-            className={cn(
-                'w-full flex-row items-center px-4',
-                className,
-            )}
+            className={cn('w-full', className)}
             style={{
-                height: NAVBAR_HEIGHT + safeAreaInsets.bottom,
+                paddingBottom: safeAreaInsets.bottom,
                 backgroundColor: theme.colours.ubhRed[9],
             }}
         >
-            {navbarItems.map(item => {
-                const isSelected = selectedTab === item.tab;
+            <View
+                className="w-full flex-row items-center px-8"
+                style={{
+                    height: NAVBAR_HEIGHT,
+                }}
+            >
+                {navbarItems.map(item => {
+                    const isSelected = selectedTab === item.tab;
 
-                const Icon = isSelected
-                    ? item.selectedIcon
-                    : item.outlineIcon;
+                    const Icon = isSelected
+                        ? item.selectedIcon
+                        : item.outlineIcon;
 
-                return (
-                    <Pressable
-                        key={item.tab}
-                        onPress={() => onTabPress(item.tab)}
-                        hitSlop={8}
-                        accessibilityRole="tab"
-                        accessibilityLabel={item.label}
-                        accessibilityState={{
-                            selected: isSelected,
-                        }}
-                        className="h-full flex-1 items-center justify-center"
-                        style={({ pressed }) => ({
-                            opacity: pressed ? 0.7 : 1,
-                        })}
-                    >
-                        <Icon
-                            width={ICON_SIZE}
-                            height={ICON_SIZE}
-                        />
-                    </Pressable>
-                );
-            })}
+                    return (
+                        <Pressable
+                            key={item.tab}
+                            onPress={() => onTabPress(item.tab)}
+                            hitSlop={8}
+                            accessibilityRole="tab"
+                            accessibilityLabel={item.label}
+                            accessibilityState={{
+                                selected: isSelected,
+                            }}
+                            className="h-full flex-1 items-center justify-center"
+                            style={({ pressed }) => ({
+                                opacity: pressed ? 0.7 : 1,
+                            })}
+                        >
+                            <View
+                                style={{
+                                    transform: [
+                                        { translateY: ICON_VERTICAL_OFFSET },
+                                    ],
+                                }}
+                            >
+                                <Icon
+                                    width={ICON_SIZE}
+                                    height={ICON_SIZE}
+                                />
+                            </View>
+                        </Pressable>
+                    );
+                })}
+            </View>
         </View>
     );
 }
