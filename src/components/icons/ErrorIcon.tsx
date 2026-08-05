@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Text, View } from 'react-native';
+import { theme } from '../../theme/theme';
 
 type ErrorIconProps = {
     size?: number;
@@ -11,8 +12,8 @@ type ErrorIconProps = {
 
 export function ErrorIcon({
     size = 22,
-    backgroundColor = '#941F1F',
-    color = '#ffffff',
+    backgroundColor = theme.status.error.shadow,
+    color = theme.colours.ubhNeutral[0],
 }: ErrorIconProps) {
     return (
         <View
