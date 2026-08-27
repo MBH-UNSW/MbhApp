@@ -94,7 +94,7 @@ function BatteryCard({ batteryLevel }: { batteryLevel: number }) {
         <View style={styles.batteryTip} />
       </View>
 
-      <Caption align="center" className="mt-4" weight="regular">
+      <Caption align="center" className="mt-3" weight="regular">
         Updated 10 minutes ago
       </Caption>
     </View>
@@ -269,12 +269,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 30,
 
-    // Give your custom bottom Navbar some breathing room.
-    paddingBottom: 130,
+    
+    paddingBottom: 100, // Give btm navbar some breathing room
   },
 
   topCard: {
-    minHeight: 160,
+    minHeight: 100,
   },
 
   sosCircle: {
@@ -285,8 +285,8 @@ const styles = StyleSheet.create({
   },
 
   batteryBody: {
-    width: 100,
-    height: 65,
+    width: 95,
+    height: 60,
     borderWidth: 4,
     borderColor: '#333333',
     borderRadius: 16,
