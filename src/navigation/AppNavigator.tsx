@@ -1,146 +1,118 @@
 import {
-    createBottomTabNavigator,
-    type BottomTabBarProps,
+  createBottomTabNavigator,
+  type BottomTabBarProps,
 } from '@react-navigation/bottom-tabs';
 import {
-    createNativeStackNavigator,
-    type NativeStackScreenProps,
+  createNativeStackNavigator,
+  type NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import React from 'react';
 import { View } from 'react-native';
 
 import { Button } from '../components/Button';
-import {
-    Navbar,
-    type NavbarTab,
-} from '../components/Navbar';
+import { Navbar, type NavbarTab } from '../components/Navbar';
 import { ComponentsScreen } from '../screens/ComponentsScreen';
+import { HomeScreen } from '../screens/HomeScreen';
 
 type RootStackParamList = {
-    Main: undefined;
-    Components: undefined;
+  Main: undefined;
+  Components: undefined;
 };
 
 type MainTabParamList = {
-    profile: undefined;
-    logbook: undefined;
-    home: undefined;
-    messages: undefined;
-    search: undefined;
+  profile: undefined;
+  logbook: undefined;
+  home: undefined;
+  messages: undefined;
+  search: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 function BlankScreen() {
-    return <View className="flex-1 bg-white" />;
+  return <View className="flex-1 bg-white" />;
 }
 
-type HomeScreenProps = {
-    onOpenComponents: () => void;
-};
+// type HomeScreenProps = {
+//   onOpenComponents: () => void;
+// };
 
-function HomeScreen({
-    onOpenComponents,
-}: HomeScreenProps) {
-    return (
-        <View className="flex-1 items-center justify-center bg-white px-5">
-            <Button
-                title="View Components"
-                variant="contained"
-                size="md"
-                onPress={onOpenComponents}
-            />
-        </View>
-    );
+// function HomeScreen({ onOpenComponents }: HomeScreenProps) {
+//   return (
+//     <View className="flex-1 items-center justify-center bg-white px-5">
+//       <Button
+//         title="View Components"
+//         variant="contained"
+//         size="md"
+//         onPress={onOpenComponents}
+//       />
+//     </View>
+//   );
+// }
+
+function CustomTabBar({ state, navigation }: BottomTabBarProps) {
+  const selectedTab = state.routes[state.index].name as NavbarTab;
+
+  const handleTabPress = (tab: NavbarTab) => {
+    navigation.navigate(tab);
+  };
+
+  return <Navbar selectedTab={selectedTab} onTabPress={handleTabPress} />;
 }
 
-function CustomTabBar({
-    state,
-    navigation,
-}: BottomTabBarProps) {
-    const selectedTab =
-        state.routes[state.index].name as NavbarTab;
+// type MainTabsProps = NativeStackScreenProps<RootStackParamList, 'Main'>;
 
-    const handleTabPress = (tab: NavbarTab) => {
-        navigation.navigate(tab);
-    };
+function MainTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="home"
+      tabBar={props => <CustomTabBar {...props} />}
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Tab.Screen name="profile" component={BlankScreen} />
 
-    return (
-        <Navbar
-            selectedTab={selectedTab}
-            onTabPress={handleTabPress}
-        />
-    );
-}
+      <Tab.Screen name="logbook" component={BlankScreen} />
 
-type MainTabsProps = NativeStackScreenProps<
-    RootStackParamList,
-    'Main'
->;
-
-function MainTabs({
-    navigation,
-}: MainTabsProps) {
-    return (
-        <Tab.Navigator
-            initialRouteName="home"
-            tabBar={props => <CustomTabBar {...props} />}
-            screenOptions={{
-                headerShown: false,
+      <Tab.Screen name="home">
+        {() => (
+          <HomeScreen
+            userName="John"
+            batteryLevel={70}
+            onSOSLongPress={() => {
+              console.log('SOS ACTIVATED');     // can edit the SOS call later
             }}
-        >
-            <Tab.Screen
-                name="profile"
-                component={BlankScreen}
-            />
+          />
+        )}
+      </Tab.Screen>
 
-            <Tab.Screen
-                name="logbook"
-                component={BlankScreen}
-            />
+      <Tab.Screen name="messages" component={BlankScreen} />
 
-            <Tab.Screen name="home">
-                {() => (
-                    <HomeScreen
-                        onOpenComponents={() =>
-                            navigation.navigate('Components')
-                        }
-                    />
-                )}
-            </Tab.Screen>
-
-            <Tab.Screen
-                name="messages"
-                component={BlankScreen}
-            />
-
-            <Tab.Screen
-                name="search"
-                component={BlankScreen}
-            />
-        </Tab.Navigator>
-    );
+      <Tab.Screen name="search" component={BlankScreen} />
+    </Tab.Navigator>
+  );
 }
 
 export function AppNavigator() {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen
-                name="Main"
-                component={MainTabs}
-                options={{
-                    headerShown: false,
-                }}
-            />
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Main"
+        component={MainTabs}
+        options={{
+          headerShown: false,
+        }}
+      />
 
-            <Stack.Screen
-                name="Components"
-                component={ComponentsScreen}
-                options={{
-                    title: 'Components',
-                }}
-            />
-        </Stack.Navigator>
-    );
+      <Stack.Screen
+        name="Components"
+        component={ComponentsScreen}
+        options={{
+          title: 'Components',
+        }}
+      />
+    </Stack.Navigator>
+  );
 }
