@@ -13,8 +13,10 @@ import { Button } from '../components/Button';
 import { Navbar, type NavbarTab } from '../components/Navbar';
 import { ComponentsScreen } from '../screens/ComponentsScreen';
 import { HomeScreen } from '../screens/HomeScreen';
+import { LoginScreen } from '../screens/LoginScreen';
 
 type RootStackParamList = {
+  Login: undefined;
   Main: undefined;
   Components: undefined;
 };
@@ -82,7 +84,7 @@ function MainTabs() {
             userName="John"
             batteryLevel={70}
             onSOSLongPress={() => {
-              console.log('SOS ACTIVATED');     // can edit the SOS call later
+              console.log('SOS ACTIVATED'); // can edit the SOS call later
             }}
           />
         )}
@@ -97,19 +99,35 @@ function MainTabs() {
 
 export function AppNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Main"
-        component={MainTabs}
-        options={{
-          headerShown: false,
-        }}
-      />
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Login">
+        {({ navigation }) => (
+          <LoginScreen
+            onLogin={() => {
+              navigation.replace('Main');
+            }}
+            onEmergency={() => {
+              console.log('Open emergency flow');
+            }}
+            onForgotPassword={() => {
+              console.log('Open forgot password page');
+            }}
+          />
+        )}
+      </Stack.Screen>
+
+      <Stack.Screen name="Main" component={MainTabs} />
 
       <Stack.Screen
         name="Components"
         component={ComponentsScreen}
         options={{
+          headerShown: true,
           title: 'Components',
         }}
       />
