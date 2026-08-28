@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
 } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
 import { SquareActivity, BatteryWarning, Heart } from 'lucide-react-native';
 
 import {
