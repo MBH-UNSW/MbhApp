@@ -84,16 +84,19 @@ export function LoginScreen({
             Patient ID
           </H4>
 
-          <Input value={pID} onChangeText={setPID} 
-                        placeholder=""/>
+          <Input value={pID} onChangeText={setPID} placeholder="" />
 
           {/* Password */}
           <H4 align="center" weight="semibold" className="mb-4 mt-5">
             Password
           </H4>
 
-          <Input value={pwd} onChangeText={setPwd} 
-                        placeholder="" secureTextEntry />
+          <Input
+            value={pwd}
+            onChangeText={setPwd}
+            placeholder=""
+            secureTextEntry
+          />
 
           {/* Forgot Password */}
           <View className="items-center">

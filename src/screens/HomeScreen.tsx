@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { SquareActivity, BatteryWarning, Heart } from 'lucide-react-native';
 
 import {
@@ -269,7 +264,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 30,
 
-    
     paddingBottom: 100, // Give btm navbar some breathing room
   },
 
