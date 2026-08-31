@@ -14,6 +14,7 @@ import { Navbar, type NavbarTab } from '../components/Navbar';
 import { ComponentsScreen } from '../screens/ComponentsScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { LoginScreen } from '../screens/LoginScreen';
+import { LogbookScreen } from '../screens/LogbookScreen';
 
 type RootStackParamList = {
   Login: undefined;
@@ -76,7 +77,10 @@ function MainTabs() {
     >
       <Tab.Screen name="profile" component={BlankScreen} />
 
-      <Tab.Screen name="logbook" component={BlankScreen} />
+      <Tab.Screen
+        name="logbook"
+        component={LogbookScreen}
+      />
 
       <Tab.Screen name="home">
         {() => (
