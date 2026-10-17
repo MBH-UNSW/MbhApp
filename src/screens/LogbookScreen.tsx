@@ -6,6 +6,12 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { getApp } from '@react-native-firebase/app';
+import {
+    getFunctions,
+    httpsCallable,
+} from '@react-native-firebase/functions';
+
 import { Button } from '../components/Button';
 import {
     FileUpload,
@@ -29,6 +35,30 @@ const detailSteps = [
 
 type DetailStep = (typeof detailSteps)[number];
 
+type CreateLogbookEntryRequest = {
+    weight: number;
+    bloodPressureSystolic: number;
+    bloodPressureDiastolic: number;
+    inr: number;
+};
+
+type CreateLogbookEntryResponse = {
+    logbookEntryId: string;
+};
+
+const functions = getFunctions(
+    getApp(),
+    'australia-southeast1',
+);
+
+const createMobileLogbookEntry = httpsCallable<
+    CreateLogbookEntryRequest,
+    CreateLogbookEntryResponse
+>(
+    functions,
+    'createMobileLogbookEntry',
+);
+
 function getCurrentDate() {
     return new Date().toLocaleDateString('en-AU', {
         day: 'numeric',
@@ -40,6 +70,7 @@ function getCurrentDate() {
 export function LogbookScreen() {
     const [stepIndex, setStepIndex] = useState(0);
     const [isComplete, setIsComplete] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [weight, setWeight] = useState('');
     const [systolic, setSystolic] = useState('');
@@ -107,9 +138,7 @@ export function LogbookScreen() {
                 return false;
             }
 
-            if (
-                !/^\d+(\.\d+)?$/.test(otherValue)
-            ) {
+            if (!/^\d+(\.\d+)?$/.test(otherValue)) {
                 Alert.alert(
                     'Invalid INR',
                     'Please enter a valid number for your INR.',
@@ -122,12 +151,20 @@ export function LogbookScreen() {
     };
 
     const handlePrevious = () => {
+        if (isSubmitting) {
+            return;
+        }
+
         if (stepIndex > 0) {
             setStepIndex(previous => previous - 1);
         }
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
+        if (isSubmitting) {
+            return;
+        }
+
         if (!validateCurrentStep()) {
             return;
         }
@@ -137,7 +174,38 @@ export function LogbookScreen() {
             return;
         }
 
-        setIsComplete(true);
+        try {
+            setIsSubmitting(true);
+
+            const result =
+                await createMobileLogbookEntry({
+                    weight: Number(weight),
+                    bloodPressureSystolic:
+                        Number(systolic),
+                    bloodPressureDiastolic:
+                        Number(diastolic),
+                    inr: Number(otherValue),
+                });
+
+            console.log(
+                'Created logbook entry:',
+                result.data.logbookEntryId,
+            );
+
+            setIsComplete(true);
+        } catch (error) {
+            console.error(
+                'Failed to create logbook entry:',
+                error,
+            );
+
+            Alert.alert(
+                'Unable to Submit',
+                'Your health details could not be submitted. Please try again.',
+            );
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleUpload = () => {
@@ -275,11 +343,11 @@ export function LogbookScreen() {
                                     <View className="flex-1">
                                         <Button
                                             title={
-                                                stepIndex ===
-                                                detailSteps.length -
-                                                    1
-                                                    ? 'Submit'
-                                                    : 'Next'
+                                                isSubmitting
+                                                    ? 'Submitting...'
+                                                    : stepIndex === detailSteps.length - 1
+                                                        ? 'Submit'
+                                                        : 'Next'
                                             }
                                             variant="contained"
                                             size="md"
@@ -310,8 +378,7 @@ export function LogbookScreen() {
                     </View>
 
                     <View
-                        className="mt-3 rounded-2xl border bg-white p-4"
-                        style={{
+                        className="mt-3 rounded-2xl border bg-white px-5 pb-5 pt-4" style={{
                             borderColor:
                                 theme.colours.ubhNeutral[3],
                         }}
@@ -420,10 +487,8 @@ function StepIndicator({
                         style={{
                             backgroundColor:
                                 index <= currentStep
-                                    ? theme.colours
-                                          .ubhRed[8]
-                                    : theme.colours
-                                          .ubhNeutral[3],
+                                    ? theme.colours.ubhRed[8]
+                                    : theme.colours.ubhNeutral[3],
                         }}
                     />
                 ))}
@@ -543,7 +608,7 @@ function DetailsStep({
                 <Input
                     value={otherValue}
                     onChangeText={onOtherValueChange}
-                    inputType="numeric"
+                    inputType="text"
                     inputMode="decimal"
                     placeholder="Enter INR"
                 />
