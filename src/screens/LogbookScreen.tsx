@@ -378,8 +378,7 @@ export function LogbookScreen() {
                     </View>
 
                     <View
-                        className="mt-3 rounded-2xl border bg-white p-4"
-                        style={{
+                        className="mt-3 rounded-2xl border bg-white px-5 pb-5 pt-4" style={{
                             borderColor:
                                 theme.colours.ubhNeutral[3],
                         }}

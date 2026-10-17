@@ -235,14 +235,14 @@ export function HomeScreen({
           <View className="mt-5 gap-4">
             <AppointmentCard
               doctor="Dr. Han"
-              time="2:00 PM"
+              time="10:00 AM"
               onPress={() => {
                 console.log('Appointment pressed'); // should I have this to see detail of the appoitnemnt????
               }}
             />
 
             <AppointmentCard
-              doctor="Dr. Han"
+              doctor="Dr. Reddy"
               time="2:00 PM"
               onPress={() => {
                 console.log('Appointment pressed');

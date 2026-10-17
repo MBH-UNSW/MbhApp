@@ -18,7 +18,6 @@ import { Input } from '../components/Input';
 import { H4 } from '../components/Typography';
 
 type LoginScreenProps = {
-  onLogin: () => void;
   onEmergency?: () => void;
   onForgotPassword?: () => void;
 };
@@ -58,7 +57,6 @@ function getLoginErrorMessage(error: unknown) {
 }
 
 export function LoginScreen({
-  onLogin,
   onEmergency,
   onForgotPassword,
 }: LoginScreenProps) {
@@ -100,7 +98,8 @@ export function LoginScreen({
 
       console.log('Firebase claims:', tokenResult.claims);
 
-      onLogin();
+      // AppNavigator listens to Firebase auth state and
+      // automatically switches to the main app after sign-in.
     } catch (error) {
       Alert.alert(
         'Login failed',

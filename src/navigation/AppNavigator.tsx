@@ -4,17 +4,25 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {
   createNativeStackNavigator,
-  type NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import React from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 import { View } from 'react-native';
 
-import { Button } from '../components/Button';
+import {
+  getAuth,
+  onAuthStateChanged,
+} from '@react-native-firebase/auth';
+
 import { Navbar, type NavbarTab } from '../components/Navbar';
 import { ComponentsScreen } from '../screens/ComponentsScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { LoginScreen } from '../screens/LoginScreen';
 import { LogbookScreen } from '../screens/LogbookScreen';
+import { MessagesScreen } from '../screens/MessagesScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
 
 type RootStackParamList = {
   Login: undefined;
@@ -30,52 +38,50 @@ type MainTabParamList = {
   search: undefined;
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator<MainTabParamList>();
+const Stack =
+  createNativeStackNavigator<RootStackParamList>();
+
+const Tab =
+  createBottomTabNavigator<MainTabParamList>();
 
 function BlankScreen() {
   return <View className="flex-1 bg-white" />;
 }
 
-// type HomeScreenProps = {
-//   onOpenComponents: () => void;
-// };
-
-// function HomeScreen({ onOpenComponents }: HomeScreenProps) {
-//   return (
-//     <View className="flex-1 items-center justify-center bg-white px-5">
-//       <Button
-//         title="View Components"
-//         variant="contained"
-//         size="md"
-//         onPress={onOpenComponents}
-//       />
-//     </View>
-//   );
-// }
-
-function CustomTabBar({ state, navigation }: BottomTabBarProps) {
-  const selectedTab = state.routes[state.index].name as NavbarTab;
+function CustomTabBar({
+  state,
+  navigation,
+}: BottomTabBarProps) {
+  const selectedTab =
+    state.routes[state.index].name as NavbarTab;
 
   const handleTabPress = (tab: NavbarTab) => {
     navigation.navigate(tab);
   };
 
-  return <Navbar selectedTab={selectedTab} onTabPress={handleTabPress} />;
+  return (
+    <Navbar
+      selectedTab={selectedTab}
+      onTabPress={handleTabPress}
+    />
+  );
 }
-
-// type MainTabsProps = NativeStackScreenProps<RootStackParamList, 'Main'>;
 
 function MainTabs() {
   return (
     <Tab.Navigator
       initialRouteName="home"
-      tabBar={props => <CustomTabBar {...props} />}
+      tabBar={props => (
+        <CustomTabBar {...props} />
+      )}
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Tab.Screen name="profile" component={BlankScreen} />
+      <Tab.Screen
+        name="profile"
+        component={ProfileScreen}
+      />
 
       <Tab.Screen
         name="logbook"
@@ -88,53 +94,84 @@ function MainTabs() {
             userName="John"
             batteryLevel={70}
             onSOSLongPress={() => {
-              console.log('SOS ACTIVATED'); // can edit the SOS call later
+              console.log('SOS ACTIVATED');
             }}
           />
         )}
       </Tab.Screen>
 
-      <Tab.Screen name="messages" component={BlankScreen} />
+      <Tab.Screen
+        name="messages"
+        component={MessagesScreen}
+      />
 
-      <Tab.Screen name="search" component={BlankScreen} />
+      <Tab.Screen
+        name="search"
+        component={BlankScreen}
+      />
     </Tab.Navigator>
   );
 }
 
 export function AppNavigator() {
+  const [isAuthenticated, setIsAuthenticated] =
+    useState<boolean | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(
+      getAuth(),
+      user => {
+        setIsAuthenticated(user !== null);
+      },
+    );
+
+    return unsubscribe;
+  }, []);
+
+  if (isAuthenticated === null) {
+    return <View className="flex-1 bg-white" />;
+  }
+
   return (
     <Stack.Navigator
-      initialRouteName="Login"
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Login">
-        {({ navigation }) => (
-          <LoginScreen
-            onLogin={() => {
-              navigation.replace('Main');
-            }}
-            onEmergency={() => {
-              console.log('Open emergency flow');
-            }}
-            onForgotPassword={() => {
-              console.log('Open forgot password page');
+      {isAuthenticated ? (
+        <>
+          <Stack.Screen
+            name="Main"
+            component={MainTabs}
+          />
+
+          <Stack.Screen
+            name="Components"
+            component={ComponentsScreen}
+            options={{
+              headerShown: true,
+              title: 'Components',
             }}
           />
-        )}
-      </Stack.Screen>
-
-      <Stack.Screen name="Main" component={MainTabs} />
-
-      <Stack.Screen
-        name="Components"
-        component={ComponentsScreen}
-        options={{
-          headerShown: true,
-          title: 'Components',
-        }}
-      />
+        </>
+      ) : (
+        <Stack.Screen name="Login">
+          {() => (
+            <LoginScreen
+              onEmergency={() => {
+                console.log(
+                  'Open emergency flow',
+                );
+              }}
+              onForgotPassword={() => {
+                console.log(
+                  'Open forgot password page',
+                );
+              }}
+            />
+          )}
+        </Stack.Screen>
+      )}
     </Stack.Navigator>
   );
 }
