@@ -84,7 +84,7 @@ const initialConversations: Conversation[] = [
     {
         id: '1',
         name: 'Nurse Tasfia',
-        initials: 'NS',
+        initials: 'NT',
         preview: 'Yes, Wednesday at 11:30 am works for me. Thank you!',
         category: 'Appointment Making',
         time: '10:42 am',
@@ -94,7 +94,7 @@ const initialConversations: Conversation[] = [
     {
         id: '2',
         name: 'Nurse Tasfia',
-        initials: 'NS',
+        initials: 'NT',
         preview: 'Hello John! You should receive your dressing this afternoon :D',
         category: 'Supply Restock',
         time: 'Yesterday',
@@ -277,7 +277,7 @@ export function MessagesScreen() {
             name: isNurseConversation
                 ? 'Nurse Tasfia'
                 : 'Clinical Support',
-            initials: isNurseConversation ? 'NS' : 'CS',
+            initials: isNurseConversation ? 'NT' : 'CS',
             preview: 'No messages yet',
             category: newCategory,
             time: 'Now',
